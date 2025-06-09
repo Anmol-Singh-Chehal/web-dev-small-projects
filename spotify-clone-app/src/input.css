@@ -1,0 +1,32 @@
+@import "tailwindcss";
+
+@theme{
+    --breakpoint-start: 320px;
+    --breakpoint-sm: 376px;
+    --breakpoint-md: 768px;
+    --breakpoint-lg: 1020px;    
+}
+
+@utility container{
+    max-width: 1335px;
+}
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 10px;
+  }
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background-color: rgba(107, 114, 128, 0.4);
+  }
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: rgba(18, 18, 18, 0.1);
+  }
+}

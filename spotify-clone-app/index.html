@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spotify - Music Web Application</title>
+    <link rel="stylesheet" href="src/output.css">
+</head>
+<body class="bg-black p-2 m-0 relative">
+    <nav id="nav-bar" class="container flex items-center justify-between max-sm:gap-1 mb-2">
+        <button id="left-nav" class="left-area max-md:w-[18vw] max-md:flex max-md:items-center max-md:justify-center  md:w-[8vw] md:flex md:items-center md:justify-center">
+                <svg role="img" viewBox="0 0 24 24" class="lg:w-12 lg:h-12 max-md:w-8 max-md:h-8 invert e-9812-logo e-9812-baseline" aria-label="Spotify" aria-hidden="false" height="32" data-encore-id="logoSpotify" style="--encore-logo-fill-color: var(--decorative-base);"><title>Spotify</title><path d="M13.427.01C6.805-.253 1.224 4.902.961 11.524.698 18.147 5.853 23.728 12.476 23.99c6.622.263 12.203-4.892 12.466-11.514S20.049.272 13.427.01m5.066 17.579a.717.717 0 0 1-.977.268 14.4 14.4 0 0 0-5.138-1.747 14.4 14.4 0 0 0-5.42.263.717.717 0 0 1-.338-1.392c1.95-.474 3.955-.571 5.958-.29 2.003.282 3.903.928 5.647 1.92a.717.717 0 0 1 .268.978m1.577-3.15a.93.93 0 0 1-1.262.376 17.7 17.7 0 0 0-5.972-1.96 17.7 17.7 0 0 0-6.281.238.93.93 0 0 1-1.11-.71.93.93 0 0 1 .71-1.11 19.5 19.5 0 0 1 6.94-.262 19.5 19.5 0 0 1 6.599 2.165c.452.245.62.81.376 1.263m1.748-3.551a1.147 1.147 0 0 1-1.546.488 21.4 21.4 0 0 0-6.918-2.208 21.4 21.4 0 0 0-7.259.215 1.146 1.146 0 0 1-.456-2.246 23.7 23.7 0 0 1 8.034-.24 23.7 23.7 0 0 1 7.657 2.445c.561.292.78.984.488 1.546m13.612-.036-.832-.247c-1.67-.495-2.14-.681-2.14-1.353 0-.637.708-1.327 2.264-1.327 1.539 0 2.839.752 3.51 1.31.116.096.24.052.24-.098V6.935c0-.097-.027-.15-.098-.203-.83-.62-2.272-1.07-3.723-1.07-2.953 0-4.722 1.68-4.722 3.59 0 2.157 1.371 2.91 3.626 3.546l.973.274c1.689.478 1.998.902 1.998 1.556 0 1.097-.831 1.433-2.07 1.433-1.556 0-3.457-.911-4.35-2.025-.08-.098-.177-.053-.177.062v2.423c0 .097.01.141.08.22.743.814 2.52 1.53 4.59 1.53 2.546 0 4.456-1.485 4.456-3.784 0-1.787-1.052-2.865-3.625-3.635m10.107-1.76c-1.68 0-2.653 1.026-3.219 2.052V9.376c0-.08-.044-.124-.124-.124h-2.22c-.079 0-.123.044-.123.124V20.72c0 .08.044.124.124.124h2.22c.079 0 .123-.044.123-.124v-4.536c.566 1.025 1.521 2.034 3.237 2.034 2.264 0 3.89-1.955 3.89-4.581s-1.644-4.545-3.908-4.545m-.654 6.986c-1.185 0-2.211-1.167-2.618-2.458.407-1.362 1.344-2.405 2.618-2.405 1.211 0 2.051.92 2.051 2.423s-.84 2.44-2.051 2.44m40.633-6.826h-2.264c-.08 0-.115.017-.15.097l-2.282 5.483-2.29-5.483c-.035-.08-.07-.097-.15-.097h-3.661v-.584c0-.955.645-1.397 1.476-1.397.496 0 1.035.256 1.415.486.089.053.15-.008.115-.088l-.796-1.901a.26.26 0 0 0-.124-.133c-.389-.203-1.025-.38-1.644-.38-1.875 0-2.954 1.432-2.954 3.254v.743h-1.503c-.08 0-.124.044-.124.124v1.768c0 .08.044.124.124.124h1.503v6.668c0 .08.044.123.124.123h2.264c.08 0 .124-.044.124-.123v-6.668h1.936l2.812 6.11-1.512 3.325c-.044.098.009.142.097.142h2.414c.08 0 .116-.018.15-.097l4.997-11.355c.035-.08-.009-.141-.097-.141M54.964 9.04c-2.865 0-4.837 2.025-4.837 4.616 0 2.573 1.971 4.616 4.837 4.616 2.856 0 4.846-2.043 4.846-4.616 0-2.591-1.99-4.616-4.846-4.616m.008 7.065c-1.37 0-2.343-1.043-2.343-2.45 0-1.405.973-2.449 2.343-2.449 1.362 0 2.335 1.043 2.335 2.45 0 1.406-.973 2.45-2.335 2.45m33.541-6.334a1.24 1.24 0 0 0-.483-.471 1.4 1.4 0 0 0-.693-.17q-.384 0-.693.17a1.24 1.24 0 0 0-.484.471q-.174.302-.174.681 0 .375.174.677.175.3.484.471t.693.17.693-.17.483-.471.175-.676q0-.38-.175-.682m-.211 1.247a1 1 0 0 1-.394.39 1.15 1.15 0 0 1-.571.14 1.16 1.16 0 0 1-.576-.14 1 1 0 0 1-.391-.39 1.14 1.14 0 0 1-.14-.566q0-.316.14-.562t.391-.388.576-.14q.32 0 .57.14.253.141.395.39t.142.565q0 .312-.142.56m-19.835-5.78c-.85 0-1.468.6-1.468 1.396s.619 1.397 1.468 1.397c.866 0 1.485-.6 1.485-1.397 0-.796-.619-1.397-1.485-1.397m19.329 5.19a.31.31 0 0 0 .134-.262q0-.168-.132-.266-.132-.099-.381-.099h-.588v1.229h.284v-.489h.154l.374.489h.35l-.41-.518a.5.5 0 0 0 .215-.084m-.424-.109h-.26v-.3h.27q.12 0 .184.036a.12.12 0 0 1 .065.116.12.12 0 0 1-.067.111.4.4 0 0 1-.192.037M69.607 9.252h-2.263c-.08 0-.124.044-.124.124v8.56c0 .08.044.123.124.123h2.263c.08 0 .124-.044.124-.123v-8.56c0-.08-.044-.124-.124-.124m-3.333 6.605a2.1 2.1 0 0 1-1.053.257c-.725 0-1.185-.425-1.185-1.362v-3.484h2.211c.08 0 .124-.044.124-.124V9.376c0-.08-.044-.124-.124-.124h-2.21V6.944c0-.097-.063-.15-.15-.08l-3.954 3.113c-.053.044-.07.088-.07.16v1.007c0 .08.044.124.123.124h1.539v3.855c0 2.087 1.203 3.06 2.918 3.06.743 0 1.46-.194 1.884-.442.062-.035.07-.07.07-.133v-1.68c0-.088-.044-.115-.123-.07" transform="translate(-0.95,0)"></path></svg>
+
+        </button>
+
+        <div id="right-nav" class="right-area flex items-center lg:gap-2 sm:gap-1 max-sm:gap-1">
+            <button id="home" class="lg:w-12 lg:h-12 bg-[#1f1f1f] sm:w-10 sm:h-10 max-sm:w-8 max-sm:h-8 rounded-full flex items-center justify-center max-sm:mx-1">
+                <svg data-encore-id="icon" role="img" aria-hidden="true" class="invert lg:w-6 lg:h-6 sm:w-5 sm:h-5 max-sm:w-5 max-sm:h-5 e-9812-icon e-9812-baseline" viewBox="0 0 24 24"><path d="M13.5 1.515a3 3 0 0 0-3 0L3 5.845a2 2 0 0 0-1 1.732V21a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-6h4v6a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V7.577a2 2 0 0 0-1-1.732l-7.5-4.33z"></path></svg>
+            </button>
+
+            <div id="search-bar" class="lg:w-[480px] lg:h-12 sm:w-[300px] sm:h-10 bg-[#1f1f1f] rounded-full flex items-center sm:px-2 lg:px-4 lg:gap-2 sm:gap-1 max-sm:h-8 max-sm:px-2 max-sm:gap-0.5">
+                <span id="search-image">
+                    <svg data-encore-id="icon" role="img" aria-hidden="true" class="lg:w-6 lg:h-6 sm:w-4 sm:h-4 max-sm:h-4 max-sm:w-4 invert e-9812-icon e-9812-baseline M9l40ptEBXPm03dU3X1k" data-testid="search-icon" viewBox="0 0 24 24" style="--encore-icon-height: var(--encore-graphic-size-decorative-larger-3); --encore-icon-width: var(--encore-graphic-size-decorative-larger-3);"><path d="M10.533 1.27893C5.35215 1.27893 1.12598 5.41887 1.12598 10.5579C1.12598 15.697 5.35215 19.8369 10.533 19.8369C12.767 19.8369 14.8235 19.0671 16.4402 17.7794L20.7929 22.132C21.1834 22.5226 21.8166 22.5226 22.2071 22.132C22.5976 21.7415 22.5976 21.1083 22.2071 20.7178L17.8634 16.3741C19.1616 14.7849 19.94 12.7634 19.94 10.5579C19.94 5.41887 15.7138 1.27893 10.533 1.27893ZM3.12598 10.5579C3.12598 6.55226 6.42768 3.27893 10.533 3.27893C14.6383 3.27893 17.94 6.55226 17.94 10.5579C17.94 14.5636 14.6383 17.8369 10.533 17.8369C6.42768 17.8369 3.12598 14.5636 3.12598 10.5579Z"></path></svg>
+                </span>
+
+                <input id="input-area" type="text" placeholder="What do you want to play?" class="lg:w-[335px] text-[#858585] font-semibold shrink-0 outline-0 sm:w-[195px] max-sm:w-[150px] max-sm:text-[12px]">
+
+                <div id="right-area" class="flex items-center">
+                    <button id="cross-button">
+                        <svg data-encore-id="icon" role="img" aria-hidden="true" class="invert lg:w-6 lg:h-6 sm:w-4 sm:h-4 max-sm:w-3.5 max-sm:h-3.5 e-9812-icon e-9812-baseline" viewBox="0 0 24 24"><path d="M3.293 3.293a1 1 0 0 1 1.414 0L12 10.586l7.293-7.293a1 1 0 1 1 1.414 1.414L13.414 12l7.293 7.293a1 1 0 0 1-1.414 1.414L12 13.414l-7.293 7.293a1 1 0 0 1-1.414-1.414L10.586 12 3.293 4.707a1 1 0 0 1 0-1.414z"></path></svg>
+                    </button>
+    
+                    <hr class="transform border-[#808080] border-[0.5px] rotate-90 w-[20px] rounded">
+
+                    <button id="browse-button">
+                        <svg data-encore-id="icon" role="img" aria-hidden="true" class="invert lg:w-6 lg:h-6 sm:w-5 sm:h-5 max-sm:w-4 max-sm:h-4 e-9812-icon e-9812-baseline" viewBox="0 0 24 24"><path d="M15 15.5c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2z"></path><path d="M1.513 9.37A1 1 0 0 1 2.291 9h19.418a1 1 0 0 1 .979 1.208l-2.339 11a1 1 0 0 1-.978.792H4.63a1 1 0 0 1-.978-.792l-2.339-11a1 1 0 0 1 .201-.837zM3.525 11l1.913 9h13.123l1.913-9H3.525zM4 2a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v4h-2V3H6v3H4V2z"></path></svg>
+                    </button>
+                </div>
+            </div>
+
+            <button id="premium1" class="text-black bg-white text-[14px] font-bold px-4 py-2 rounded-full">Explore Premium</button>
+
+            <button id="install-app" class="flex items-center justify-center gap-2 px-4 py-2 rounded-full">
+                <svg data-encore-id="icon" role="img" aria-hidden="true" class="lg:w-4 lg:h-4 sm:h-3 sm:w-3 invert e-9812-icon e-9812-baseline" viewBox="0 0 16 16" style="--encore-icon-height: var(--encore-graphic-size-decorative-smaller); --encore-icon-width: var(--encore-graphic-size-decorative-smaller);"><path d="M4.995 8.745a.75.75 0 0 1 1.06 0L7.25 9.939V4a.75.75 0 0 1 1.5 0v5.94l1.195-1.195a.75.75 0 1 1 1.06 1.06L8 12.811l-.528-.528a.945.945 0 0 1-.005-.005L4.995 9.805a.75.75 0 0 1 0-1.06z"></path><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13z"></path></svg>
+
+                <p class="text-[14px] text-[#858585] font-bold">Install App</p>
+            </button>
+
+            <button id="notification" class="px-4 py-2 rounded-full">
+                <svg data-encore-id="icon" role="img" aria-hidden="true" class="invert lg:w-4 lg:h-4 sm:w-3 sm:h-3 e-9812-icon e-9812-baseline" viewBox="0 0 16 16" style="--encore-icon-height: var(--encore-graphic-size-decorative-smaller); --encore-icon-width: var(--encore-graphic-size-decorative-smaller);"><path d="M8 1.5a4 4 0 0 0-4 4v3.27a.75.75 0 0 1-.1.373L2.255 12h11.49L12.1 9.142a.75.75 0 0 1-.1-.374V5.5a4 4 0 0 0-4-4zm-5.5 4a5.5 5.5 0 0 1 11 0v3.067l2.193 3.809a.75.75 0 0 1-.65 1.124H10.5a2.5 2.5 0 0 1-5 0H.957a.75.75 0 0 1-.65-1.124L2.5 8.569V5.5zm4.5 8a1 1 0 1 0 2 0H7z"></path></svg>
+
+            </button>
+
+            <button id="user" class="bg-gray-400/25 rounded-full lg:w-12 lg:h-12 sm:w-10 sm:h-10 max-sm:w-8 max-sm:h-8 flex items-center justify-center">
+                <p class="text-black bg-sky-600 text-[14px] font-bold flex items-center justify-center lg:w-8 lg:h-8 sm:w-6 max-sm:h-5 max-sm:w-5 sm:h-6 rounded-full">A</p>
+            </button>
+        </div>
+
+        <div id="hidden-area" class="absolute top-0 left-[-61%] z-20 bg-[#1f1f1f] rounded-[6px] border-[1px] border-[#484848] duration-300 w-[60%] h-[calc(100vh-60px)]">
+            <div class="base relative px-4 py-4 h-full">
+                <div class="flex items-center justify-between">
+                    <p class="text-white text-xl font-bold hover:underline hover:cursor-pointer">Spotify</p>
+                
+                    <button id="close-button" class="right-area">
+                        <svg role="img" viewBox="0 0 24 24" class="lg:w-12 lg:h-12 sm:w-10 sm:h-10 invert e-9812-logo e-9812-baseline" aria-label="Spotify" aria-hidden="false" height="32" data-encore-id="logoSpotify" style="--encore-logo-fill-color: var(--decorative-base);"><title>Spotify</title><path d="M13.427.01C6.805-.253 1.224 4.902.961 11.524.698 18.147 5.853 23.728 12.476 23.99c6.622.263 12.203-4.892 12.466-11.514S20.049.272 13.427.01m5.066 17.579a.717.717 0 0 1-.977.268 14.4 14.4 0 0 0-5.138-1.747 14.4 14.4 0 0 0-5.42.263.717.717 0 0 1-.338-1.392c1.95-.474 3.955-.571 5.958-.29 2.003.282 3.903.928 5.647 1.92a.717.717 0 0 1 .268.978m1.577-3.15a.93.93 0 0 1-1.262.376 17.7 17.7 0 0 0-5.972-1.96 17.7 17.7 0 0 0-6.281.238.93.93 0 0 1-1.11-.71.93.93 0 0 1 .71-1.11 19.5 19.5 0 0 1 6.94-.262 19.5 19.5 0 0 1 6.599 2.165c.452.245.62.81.376 1.263m1.748-3.551a1.147 1.147 0 0 1-1.546.488 21.4 21.4 0 0 0-6.918-2.208 21.4 21.4 0 0 0-7.259.215 1.146 1.146 0 0 1-.456-2.246 23.7 23.7 0 0 1 8.034-.24 23.7 23.7 0 0 1 7.657 2.445c.561.292.78.984.488 1.546m13.612-.036-.832-.247c-1.67-.495-2.14-.681-2.14-1.353 0-.637.708-1.327 2.264-1.327 1.539 0 2.839.752 3.51 1.31.116.096.24.052.24-.098V6.935c0-.097-.027-.15-.098-.203-.83-.62-2.272-1.07-3.723-1.07-2.953 0-4.722 1.68-4.722 3.59 0 2.157 1.371 2.91 3.626 3.546l.973.274c1.689.478 1.998.902 1.998 1.556 0 1.097-.831 1.433-2.07 1.433-1.556 0-3.457-.911-4.35-2.025-.08-.098-.177-.053-.177.062v2.423c0 .097.01.141.08.22.743.814 2.52 1.53 4.59 1.53 2.546 0 4.456-1.485 4.456-3.784 0-1.787-1.052-2.865-3.625-3.635m10.107-1.76c-1.68 0-2.653 1.026-3.219 2.052V9.376c0-.08-.044-.124-.124-.124h-2.22c-.079 0-.123.044-.123.124V20.72c0 .08.044.124.124.124h2.22c.079 0 .123-.044.123-.124v-4.536c.566 1.025 1.521 2.034 3.237 2.034 2.264 0 3.89-1.955 3.89-4.581s-1.644-4.545-3.908-4.545m-.654 6.986c-1.185 0-2.211-1.167-2.618-2.458.407-1.362 1.344-2.405 2.618-2.405 1.211 0 2.051.92 2.051 2.423s-.84 2.44-2.051 2.44m40.633-6.826h-2.264c-.08 0-.115.017-.15.097l-2.282 5.483-2.29-5.483c-.035-.08-.07-.097-.15-.097h-3.661v-.584c0-.955.645-1.397 1.476-1.397.496 0 1.035.256 1.415.486.089.053.15-.008.115-.088l-.796-1.901a.26.26 0 0 0-.124-.133c-.389-.203-1.025-.38-1.644-.38-1.875 0-2.954 1.432-2.954 3.254v.743h-1.503c-.08 0-.124.044-.124.124v1.768c0 .08.044.124.124.124h1.503v6.668c0 .08.044.123.124.123h2.264c.08 0 .124-.044.124-.123v-6.668h1.936l2.812 6.11-1.512 3.325c-.044.098.009.142.097.142h2.414c.08 0 .116-.018.15-.097l4.997-11.355c.035-.08-.009-.141-.097-.141M54.964 9.04c-2.865 0-4.837 2.025-4.837 4.616 0 2.573 1.971 4.616 4.837 4.616 2.856 0 4.846-2.043 4.846-4.616 0-2.591-1.99-4.616-4.846-4.616m.008 7.065c-1.37 0-2.343-1.043-2.343-2.45 0-1.405.973-2.449 2.343-2.449 1.362 0 2.335 1.043 2.335 2.45 0 1.406-.973 2.45-2.335 2.45m33.541-6.334a1.24 1.24 0 0 0-.483-.471 1.4 1.4 0 0 0-.693-.17q-.384 0-.693.17a1.24 1.24 0 0 0-.484.471q-.174.302-.174.681 0 .375.174.677.175.3.484.471t.693.17.693-.17.483-.471.175-.676q0-.38-.175-.682m-.211 1.247a1 1 0 0 1-.394.39 1.15 1.15 0 0 1-.571.14 1.16 1.16 0 0 1-.576-.14 1 1 0 0 1-.391-.39 1.14 1.14 0 0 1-.14-.566q0-.316.14-.562t.391-.388.576-.14q.32 0 .57.14.253.141.395.39t.142.565q0 .312-.142.56m-19.835-5.78c-.85 0-1.468.6-1.468 1.396s.619 1.397 1.468 1.397c.866 0 1.485-.6 1.485-1.397 0-.796-.619-1.397-1.485-1.397m19.329 5.19a.31.31 0 0 0 .134-.262q0-.168-.132-.266-.132-.099-.381-.099h-.588v1.229h.284v-.489h.154l.374.489h.35l-.41-.518a.5.5 0 0 0 .215-.084m-.424-.109h-.26v-.3h.27q.12 0 .184.036a.12.12 0 0 1 .065.116.12.12 0 0 1-.067.111.4.4 0 0 1-.192.037M69.607 9.252h-2.263c-.08 0-.124.044-.124.124v8.56c0 .08.044.123.124.123h2.263c.08 0 .124-.044.124-.123v-8.56c0-.08-.044-.124-.124-.124m-3.333 6.605a2.1 2.1 0 0 1-1.053.257c-.725 0-1.185-.425-1.185-1.362v-3.484h2.211c.08 0 .124-.044.124-.124V9.376c0-.08-.044-.124-.124-.124h-2.21V6.944c0-.097-.063-.15-.15-.08l-3.954 3.113c-.053.044-.07.088-.07.16v1.007c0 .08.044.124.123.124h1.539v3.855c0 2.087 1.203 3.06 2.918 3.06.743 0 1.46-.194 1.884-.442.062-.035.07-.07.07-.133v-1.68c0-.088-.044-.115-.123-.07" transform="translate(-0.95,0)"></path></svg>
+        
+                    </button>
+                </div>
+    
+                <hr class="border-[#808080] border-[0.5px] rounded my-4">
+    
+                <div id="list" class="flex flex-col gap-4">
+                    <button id="premium2" class=" text-black bg-white text-[12px] font-semibold px-2 py-1  rounded-full self-start">Explore Premium</button>
+                    
+        
+                    <button id="notification" class="px-2 py-1 rounded-full flex items-center justify-center gap-1 bg-gray-400/25 self-start">
+                        <svg data-encore-id="icon" role="img" aria-hidden="true" class="invert w-3 h-3 e-9812-icon e-9812-baseline" viewBox="0 0 16 16" style="--encore-icon-height: var(--encore-graphic-size-decorative-smaller); --encore-icon-width: var(--encore-graphic-size-decorative-smaller);"><path d="M8 1.5a4 4 0 0 0-4 4v3.27a.75.75 0 0 1-.1.373L2.255 12h11.49L12.1 9.142a.75.75 0 0 1-.1-.374V5.5a4 4 0 0 0-4-4zm-5.5 4a5.5 5.5 0 0 1 11 0v3.067l2.193 3.809a.75.75 0 0 1-.65 1.124H10.5a2.5 2.5 0 0 1-5 0H.957a.75.75 0 0 1-.65-1.124L2.5 8.569V5.5zm4.5 8a1 1 0 1 0 2 0H7z"></path></svg>
+    
+                        <p class="text-white text-[12px] font-semibold">What's New</p>
+        
+                    </button>
+    
+                    <div class="bottom-area flex items-center justify-center w-[60vw] absolute bottom-0 left-0">
+                        <button id="install-app" class="flex items-center justify-center gap-1 px-2 py-1 rounded-full mb-4 bg-green-600">
+                            <svg data-encore-id="icon" role="img" aria-hidden="true" class="w-5 h-5 e-9812-icon e-9812-baseline" viewBox="0 0 16 16" style="--encore-icon-height: var(--encore-graphic-size-decorative-smaller); --encore-icon-width: var(--encore-graphic-size-decorative-smaller);"><path d="M4.995 8.745a.75.75 0 0 1 1.06 0L7.25 9.939V4a.75.75 0 0 1 1.5 0v5.94l1.195-1.195a.75.75 0 1 1 1.06 1.06L8 12.811l-.528-.528a.945.945 0 0 1-.005-.005L4.995 9.805a.75.75 0 0 1 0-1.06z"></path><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13z"></path></svg>
+            
+                            <p class="text-[12px] text-black font-bold">Install App</p>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+      
+    </nav>
+
+    <main id="main-area" class="mb-2">
+        <div id="main-base" class="flex">
+            <section id="left-main-section" class="bg-[#121212] lg:w-[21.5vw] lg:h-[78vh] rounded-[6px] md:w-[8vw] md:h-[77vh] max-md:w-[18vw] max-md:h-[76vh] lg:px-4 md:px-2 max-md:px-2 max-md:py-4 lg:py-3 md:py-5 flex flex-col lg:gap-5 md:gap-6 max-md:gap-5 max-lg:items-center max-md:mr-2 md:mr-2 lg:mr-2">
+                <div id="left-area-top-1" class="flex flex-col">
+                    <div id="left-area-1" class="flex justify-between items-center lg:mb-3.5">
+                        <div class="left-side flex justify-center items-center lg:gap-3 md:gap-3">
+                            <button id="library-open">
+                                <svg data-encore-id="icon" role="img" aria-hidden="true" class="invert lg:w-5 lg:h-5 md:w-5 md:h-5 max-md:w-4 max-md:h-4 e-9812-icon e-9812-baseline e-9812-icon--auto-mirror" viewBox="0 0 16 16" style="--encore-icon-height: var(--encore-graphic-size-decorative-smaller); --encore-icon-width: var(--encore-graphic-size-decorative-smaller);"><path d="M10.97 5.47a.75.75 0 1 1 1.06 1.06L10.56 8l1.47 1.47a.75.75 0 1 1-1.06 1.06l-2-2a.75.75 0 0 1 0-1.06l2-2Z"></path><path d="M1 0a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V1a1 1 0 0 0-1-1H1Zm.5 1.5H5v13H1.5v-13Zm13 13h-8v-13h8v13Z"></path></svg>
+                            </button>
+                
+                            <p class="text-white text-[16px] font-bold">Your Library</p>
+                        </div>
+                
+                        <div class="right-side flex justify-center items-center lg:gap-4 md:gap-4">
+                            <button id="add-artist" class="lg:w-9 lg:h-9 md:w-9 md:h-9 max-md:w-7 max-md:h-7 bg-[#1f1f1f] flex justify-center items-center rounded-full">
+                                <svg data-encore-id="icon" role="img" aria-hidden="true" class="invert lg:w-4 lg:h-4 md:w-4 md:h-4 max-md:w-3 max-md:h-3 e-9812-icon e-9812-baseline gPxvvwdrTY6FbTx3mvl1" viewBox="0 0 16 16" style="--encore-icon-height: var(--encore-graphic-size-decorative-smaller); --encore-icon-width: var(--encore-graphic-size-decorative-smaller);"><path d="M15.25 8a.75.75 0 0 1-.75.75H8.75v5.75a.75.75 0 0 1-1.5 0V8.75H1.5a.75.75 0 0 1 0-1.5h5.75V1.5a.75.75 0 0 1 1.5 0v5.75h5.75a.75.75 0 0 1 .75.75z"></path></svg>
+                            </button>
+                
+                            <button id="resize">
+                                <svg data-encore-id="icon" role="img" aria-hidden="true" class="invert lg:w-4 lg:h-4 md:w-4 md:h-4 max-md:w-3 max-md:h-3 e-9812-icon e-9812-baseline" viewBox="0 0 16 16" style="--encore-icon-height: var(--encore-graphic-size-decorative-smaller); --encore-icon-width: var(--encore-graphic-size-decorative-smaller);"><path d="M6.53 9.47a.75.75 0 0 1 0 1.06l-2.72 2.72h1.018a.75.75 0 0 1 0 1.5H1.25v-3.579a.75.75 0 0 1 1.5 0v1.018l2.72-2.72a.75.75 0 0 1 1.06 0zm2.94-2.94a.75.75 0 0 1 0-1.06l2.72-2.72h-1.018a.75.75 0 1 1 0-1.5h3.578v3.579a.75.75 0 0 1-1.5 0V3.81l-2.72 2.72a.75.75 0 0 1-1.06 0z"></path></svg>
+                
+                            </button>
+                        </div>
+                    </div>
+                
+                    <div id="left-area-2">
+                        <button id="artists" class="bg-[#2a2a2a] text-white text-[14px] lg:py-1 md:py-1 lg:px-3 md:px-3 font-semibold rounded-full lg:mb-3.5">Artists</button>
+                    </div>
+                
+                    <div id="left-area-3" class=" flex justify-between items-center ">
+                        <button id="search-library">
+                            <span id="search-image">
+                                <svg data-encore-id="icon" role="img" aria-hidden="true" class="lg:w-5 lg:h-5 sm:w-5 sm:h-5 max-md:h-4 max-md:w-4 invert e-9812-icon e-9812-baseline M9l40ptEBXPm03dU3X1k" data-testid="search-icon" viewBox="0 0 24 24" style="--encore-icon-height: var(--encore-graphic-size-decorative-larger-3); --encore-icon-width: var(--encore-graphic-size-decorative-larger-3);"><path d="M10.533 1.27893C5.35215 1.27893 1.12598 5.41887 1.12598 10.5579C1.12598 15.697 5.35215 19.8369 10.533 19.8369C12.767 19.8369 14.8235 19.0671 16.4402 17.7794L20.7929 22.132C21.1834 22.5226 21.8166 22.5226 22.2071 22.132C22.5976 21.7415 22.5976 21.1083 22.2071 20.7178L17.8634 16.3741C19.1616 14.7849 19.94 12.7634 19.94 10.5579C19.94 5.41887 15.7138 1.27893 10.533 1.27893ZM3.12598 10.5579C3.12598 6.55226 6.42768 3.27893 10.533 3.27893C14.6383 3.27893 17.94 6.55226 17.94 10.5579C17.94 14.5636 14.6383 17.8369 10.533 17.8369C6.42768 17.8369 3.12598 14.5636 3.12598 10.5579Z"></path></svg>
+                            </span>
+                        </button>
+                
+                        <button id="recents" class="flex justify-center items-center lg:gap-4 md:gap-4">
+                            <p class="text-[#858585] text-[16px] font-semibold">recents</p>
+                
+                            <span>
+                                <svg data-encore-id="icon" role="img" aria-hidden="true" class="lg:w-4 lg:h-4 sm:w-4 sm:h-4 max-md:h-3 max-md:w-3 invert e-9812-icon e-9812-baseline e-9812-icon--auto-mirror" viewBox="0 0 16 16" style="--encore-icon-height: var(--encore-graphic-size-decorative-smaller); --encore-icon-width: var(--encore-graphic-size-decorative-smaller);"><path d="M15 14.5H5V13h10v1.5zm0-5.75H5v-1.5h10v1.5zM15 3H5V1.5h10V3zM3 3H1V1.5h2V3zm0 11.5H1V13h2v1.5zm0-5.75H1v-1.5h2v1.5z"></path></svg>
+                
+                            </span>
+                        </button>
+                    </div>
+                </div>
+    
+                <div id="left-area-top-2" class="flex flex-col justify-center">
+                    <span class="flex justify-center items-center mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" data-encore-id="icon" role="img" aria-hidden="true" viewBox="0 0 24 24" class="lg:w-10 lg:h-10 md:w-6 md:h-6 max-md:w-6 max-md:h-6 invert Svg-sc-ytk21e-0 iYxpxA"><path d="M3 22a1 1 0 0 1-1-1V3a1 1 0 0 1 2 0v18a1 1 0 0 1-1 1zM15.5 2.134A1 1 0 0 0 14 3v18a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V6.464a1 1 0 0 0-.5-.866l-6-3.464zM9 2a1 1 0 0 0-1 1v18a1 1 0 1 0 2 0V3a1 1 0 0 0-1-1z"/></svg>
+                
+                    </span>
+                
+                    <button id="add-artist" class="lg:w-9 lg:h-9 max-md:w-7 max-md:h-7 bg-[#1f1f1f] md:w-9 md:h-9 flex justify-center items-center rounded-full">
+                        <svg data-encore-id="icon" role="img" aria-hidden="true" class="invert lg:w-4 lg:h-4 md:w-4 md:h-4 max-md:w-3 max-md:h-3 e-9812-icon e-9812-baseline gPxvvwdrTY6FbTx3mvl1" viewBox="0 0 16 16" style="--encore-icon-height: var(--encore-graphic-size-decorative-smaller); --encore-icon-width: var(--encore-graphic-size-decorative-smaller);"><path d="M15.25 8a.75.75 0 0 1-.75.75H8.75v5.75a.75.75 0 0 1-1.5 0V8.75H1.5a.75.75 0 0 1 0-1.5h5.75V1.5a.75.75 0 0 1 1.5 0v5.75h5.75a.75.75 0 0 1 .75.75z"></path></svg>
+                    </button>
+                </div>
+                
+    
+                <div id="left-area-bottom">
+                    <ul class="list-none flex flex-col max-md:justify-center lg:gap-3 md:gap-4 max-md:gap-1.5">
+                        <li class="flex items-center lg:gap-3 md:gap-3 max-md:gap-1.5">
+                            <img src="img/covers/cover.jpg" alt="singer-image" class="lg:w-[50px] lg:h-[50px] md:w-[50px] md:h-[50px] max-sm:w-[40px] max-md:h-[40px] object-cover rounded-full">
+    
+                            <div class="flex flex-col justify-center">
+                                <p class="text-white text-[16px] font-semibold">Karan Aujla</p>
+        
+                                <p class="text-[#858585] text-[14px] font-semibold">Karan Aujla</p>
+                            </div>
+                        </li>
+                        <li class="flex items-center lg:gap-3 md:gap-3 max-md:gap-1.5">
+                            <img src="img/covers/cover.jpg" alt="singer-image" class="lg:w-[50px] lg:h-[50px] md:w-[50px] md:h-[50px] max-sm:w-[40px] max-md:h-[40px] object-cover rounded-full">
+    
+                            <div class="flex flex-col justify-center">
+                                <p class="text-white text-[16px] font-semibold">Karan Aujla</p>
+        
+                                <p class="text-[#858585] text-[14px] font-semibold">Karan Aujla</p>
+                            </div>
+                        </li>
+                        <li class="flex items-center lg:gap-3 md:gap-3 max-md:gap-1.5">
+                            <img src="img/covers/cover.jpg" alt="singer-image" class="lg:w-[50px] lg:h-[50px] md:w-[50px] md:h-[50px] max-sm:w-[40px] max-md:h-[40px] object-cover rounded-full">
+    
+                            <div class="flex flex-col justify-center">
+                                <p class="text-white text-[16px] font-semibold">Karan Aujla</p>
+        
+                                <p class="text-[#858585] text-[14px] font-semibold">Karan Aujla</p>
+                            </div>
+                        </li>
+                        <li class="flex items-center lg:gap-3 md:gap-3 max-md:gap-1.5">
+                            <img src="img/covers/cover.jpg" alt="singer-image" class="lg:w-[50px] lg:h-[50px] md:w-[50px] md:h-[50px] max-sm:w-[40px] max-md:h-[40px] object-cover rounded-full">
+    
+                            <div class="flex flex-col justify-center">
+                                <p class="text-white text-[16px] font-semibold">Karan Aujla</p>
+        
+                                <p class="text-[#858585] text-[14px] font-semibold">Karan Aujla</p>
+                            </div>
+                        </li>
+                        
+                    </ul>
+                </div>
+            </section>
+    
+            <section id="middle-main-section" class="bg-[#121212] lg:w-[58vw] lg:h-[78vh] md:w-[61vw] md:h-[77vh] max-md:w-[78vw] max-md:h-[76vh] rounded-[6px] relative lg:pl-8 lg:py-4 md:pl-8 md:py-4 max-md:pl-5 max-md:py-4 md:mr-2 lg:mr-2 overflow-hidden overflow-y-auto max-md:no-scrollbar  scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-gray-300">
+                <div class="absolute top-0 left-0 z-0  lg:h-[40vh] w-full md:h-[30vh] max-md:h-[30vh] rounded-[6px] bg-linear-to-b from-[#212121] to-[#121212]">
+                </div>
+
+                <div id="first-area" class="relative z-10 flex flex-col md:gap-6 lg:gap-3 max-md:gap-5 lg:mx-3 md:mx-3">
+                    <div id="button-area" class="flex lg:gap-2 md:gap-2 max-md:gap-2">
+                        <button id="all" class="bg-white text-black text-[14px] lg:py-1 md:py-1 lg:px-3 md:px-3 font-semibold rounded-full lg:mb-3.5 max-md:px-2.5 max-md:2">All</button>
+    
+                        <button id="music" class="bg-[#373737] text-white text-[14px] lg:py-1 md:py-1 lg:px-3 md:px-3 font-semibold rounded-full lg:mb-3.5 max-md:px-2.5 max-md:2">Music</button>
+    
+                        <button id="podcasts" class="bg-[#373737] text-white text-[14px] lg:py-1 md:py-1 lg:px-3 md:px-3 font-semibold rounded-full lg:mb-3.5 max-md:px-2.5 max-md:2">Podcasts</button>
+                    </div>
+    
+                    <div id="user-area" class="flex flex-col md:mr-4 max-md:mx-1.5">
+                        <p class="text-[#808080] text-[10px] font-semibold">Made For</p>
+                        
+                        <div class="right-area leading-2.5 flex justify-between items-baseline-last">
+                            <p class="text-white font-bold text-2xl max-md:text-[18px]">Anmol Singh</p>
+                            <p class="text-[#808080] max-md:text-[12px] md:text-[13px] lg:text-[13px] font-bold hover:underline hover:cursor-pointer lg:mr-5 md:mr-3 max-md:mr-6">Show All</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="second-area" class="relative z-10 flex flex-nowrap overflow-hidden overflow-x-auto no-scrollbar lg:mb-8 md:mb-6 max-md:mb-5">
+                    <div id="card1" class="flex flex-col gap-2 lg:p-3 md:p-3 max-md:p-1.5 hover:bg-[#1f1f1f] rounded-[6px] shrink-0">
+                        <img src="img/covers/cover.jpg" alt="song-poster" class="lg:w-[150px] lg:h-[150px] md:w-[120px] md:h-[120px] max-md:w-[90px] max-md:h-[90px] object-contain rounded-[6px] ">
+
+                        <p class="text-[#7e7e7e] lg:text-[14px] md:text-[14px] max-md:text-[12px] h-[30px] font-semibold lg:w-[140px] md:w-[110px]  max-md:w-[80px]  overflow-clip line-clamp-2 leading-4">Karan Aujla, Ikky, Nora Fateh, Neha Kakkar</p>
+                    </div>
+
+                    <div id="card1" class="flex flex-col gap-2 lg:p-3 md:p-3 max-md:p-1.5 hover:bg-[#1f1f1f] rounded-[6px] shrink-0">
+                        <img src="img/covers/cover.jpg" alt="song-poster" class="lg:w-[150px] lg:h-[150px] md:w-[120px] md:h-[120px] max-md:w-[90px] max-md:h-[90px] object-contain rounded-[6px] ">
+
+                        <p class="text-[#7e7e7e] lg:text-[14px] md:text-[14px] max-md:text-[12px] h-[30px] font-semibold lg:w-[140px] md:w-[110px]  max-md:w-[80px]  overflow-clip line-clamp-2 leading-4">Karan Aujla, Ikky, Nora Fateh, Neha Kakkar</p>
+                    </div>
+
+                    <div id="card1" class="flex flex-col gap-2 lg:p-3 md:p-3 max-md:p-1.5 hover:bg-[#1f1f1f] rounded-[6px] shrink-0">
+                        <img src="img/covers/cover.jpg" alt="song-poster" class="lg:w-[150px] lg:h-[150px] md:w-[120px] md:h-[120px] max-md:w-[90px] max-md:h-[90px] object-contain rounded-[6px] ">
+
+                        <p class="text-[#7e7e7e] lg:text-[14px] md:text-[14px] max-md:text-[12px] h-[30px] font-semibold lg:w-[140px] md:w-[110px]  max-md:w-[80px]  overflow-clip line-clamp-2 leading-4">Karan Aujla, Ikky, Nora Fateh, Neha Kakkar</p>
+                    </div>
+
+                    <div id="card1" class="flex flex-col gap-2 lg:p-3 md:p-3 max-md:p-1.5 hover:bg-[#1f1f1f] rounded-[6px] shrink-0">
+                        <img src="img/covers/cover.jpg" alt="song-poster" class="lg:w-[150px] lg:h-[150px] md:w-[120px] md:h-[120px] max-md:w-[90px] max-md:h-[90px] object-contain rounded-[6px] ">
+
+                        <p class="text-[#7e7e7e] lg:text-[14px] md:text-[14px] max-md:text-[12px] h-[30px] font-semibold lg:w-[140px] md:w-[110px]  max-md:w-[80px]  overflow-clip line-clamp-2 leading-4">Karan Aujla, Ikky, Nora Fateh, Neha Kakkar</p>
+                    </div>
+
+                    <div id="card1" class="flex flex-col gap-2 lg:p-3 md:p-3 max-md:p-1.5 hover:bg-[#1f1f1f] rounded-[6px] shrink-0">
+                        <img src="img/covers/cover.jpg" alt="song-poster" class="lg:w-[150px] lg:h-[150px] md:w-[120px] md:h-[120px] max-md:w-[90px] max-md:h-[90px] object-contain rounded-[6px] ">
+
+                        <p class="text-[#7e7e7e] lg:text-[14px] md:text-[14px] max-md:text-[12px] h-[30px] font-semibold lg:w-[140px] md:w-[110px]  max-md:w-[80px]  overflow-clip line-clamp-2 leading-4">Karan Aujla, Ikky, Nora Fateh, Neha Kakkar</p>
+                    </div>
+
+                    <div id="card1" class="flex flex-col gap-2 lg:p-3 md:p-3 max-md:p-1.5 hover:bg-[#1f1f1f] rounded-[6px] shrink-0">
+                        <img src="img/covers/cover.jpg" alt="song-poster" class="lg:w-[150px] lg:h-[150px] md:w-[120px] md:h-[120px] max-md:w-[90px] max-md:h-[90px] object-contain rounded-[6px] ">
+
+                        <p class="text-[#7e7e7e] lg:text-[14px] md:text-[14px] max-md:text-[12px] h-[30px] font-semibold lg:w-[140px] md:w-[110px]  max-md:w-[80px]  overflow-clip line-clamp-2 leading-4">Karan Aujla, Ikky, Nora Fateh, Neha Kakkar</p>
+                    </div>
+                    
+                </div>
+
+                <div id="third-area" class="flex flex-col lg:mb-8 md:mb-6 max-md:mb-5">
+                    <div class="upper-area leading-2.5 flex justify-between items-baseline-last lg:mr-11 md:ml-2.5 md:mr-10 max-md:ml-1.5 max-md:mr-8">
+                        <p class="text-white font-bold text-2xl max-md:text-[18px]">Your top mixes</p>
+                        <p class="text-[#808080] max-md:text-[12px] md:text-[13px] lg:text-[13px] font-bold hover:underline hover:cursor-pointer">Show All</p>
+                    </div>
+
+                    <div id="bottom-area" class="relative z-10 flex flex-nowrap overflow-hidden overflow-x-auto no-scrollbar">
+                        
+                        <div id="card1" class="flex flex-col gap-2 lg:p-3 md:p-3 max-md:p-1.5 hover:bg-[#1f1f1f] rounded-[6px] shrink-0">
+                            <img src="img/covers/cover.jpg" alt="song-poster" class="lg:w-[150px] lg:h-[150px] md:w-[120px] md:h-[120px] max-md:w-[90px] max-md:h-[90px] object-contain rounded-[6px] ">
+    
+                            <p class="text-[#7e7e7e] lg:text-[14px] md:text-[14px] max-md:text-[12px] h-[30px] font-semibold lg:w-[140px] md:w-[110px]  max-md:w-[80px]  overflow-clip line-clamp-2 leading-4">Karan Aujla, Ikky, Nora Fateh, Neha Kakkar</p>
+                        </div>
+
+                        <div id="card1" class="flex flex-col gap-2 lg:p-3 md:p-3 max-md:p-1.5 hover:bg-[#1f1f1f] rounded-[6px] shrink-0">
+                            <img src="img/covers/cover.jpg" alt="song-poster" class="lg:w-[150px] lg:h-[150px] md:w-[120px] md:h-[120px] max-md:w-[90px] max-md:h-[90px] object-contain rounded-[6px] ">
+    
+                            <p class="text-[#7e7e7e] lg:text-[14px] md:text-[14px] max-md:text-[12px] h-[30px] font-semibold lg:w-[140px] md:w-[110px]  max-md:w-[80px]  overflow-clip line-clamp-2 leading-4">Karan Aujla, Ikky, Nora Fateh, Neha Kakkar</p>
+                        </div>
+
+                        <div id="card1" class="flex flex-col gap-2 lg:p-3 md:p-3 max-md:p-1.5 hover:bg-[#1f1f1f] rounded-[6px] shrink-0">
+                            <img src="img/covers/cover.jpg" alt="song-poster" class="lg:w-[150px] lg:h-[150px] md:w-[120px] md:h-[120px] max-md:w-[90px] max-md:h-[90px] object-contain rounded-[6px] ">
+    
+                            <p class="text-[#7e7e7e] lg:text-[14px] md:text-[14px] max-md:text-[12px] h-[30px] font-semibold lg:w-[140px] md:w-[110px]  max-md:w-[80px]  overflow-clip line-clamp-2 leading-4">Karan Aujla, Ikky, Nora Fateh, Neha Kakkar</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="fourth-area" class="flex flex-col lg:mb-8 md:mb-6 max-md:mb-5">
+                    <div class="upper-area leading-2.5 flex justify-between items-baseline-last lg:mr-11 md:ml-2.5 md:mr-10 max-md:ml-1.5 max-md:mr-8">
+                        <p class="text-white font-bold text-2xl max-md:text-[18px]">Recently played</p>
+                        <p class="text-[#808080] max-md:text-[12px] md:text-[13px] lg:text-[13px] font-bold hover:underline hover:cursor-pointer">Show All</p>
+                    </div>
+
+                    <div id="bottom-area" class="relative z-10 flex flex-nowrap overflow-hidden overflow-x-auto no-scrollbar">
+                        
+                        <div id="card1" class="flex flex-col gap-2 lg:p-3 md:p-3 max-md:p-1.5 hover:bg-[#1f1f1f] rounded-[6px] shrink-0">
+                            <img src="img/covers/cover.jpg" alt="song-poster" class="lg:w-[150px] lg:h-[150px] md:w-[120px] md:h-[120px] max-md:w-[90px] max-md:h-[90px] object-contain rounded-[6px] ">
+    
+                            <p class="text-[#7e7e7e] text-[14px] font-semibold lg:w-[140px] md:w-[110px]  max-md:w-[80px] h-[30px] overflow-clip line-clamp-2 leading-4">Karan Aujla, Ikky, Nora Fateh, Neha Kakkar</p>
+                        </div>
+    
+                    </div>
+                </div>
+
+                <div id="fifth-area" class="lg:mb-8 md:mb-6 max-md:mb-5">
+                    <div id="user-area" class="flex flex-col md:ml-2.5 md:mr-10 lg:mr-10.5 max-md:ml-2 max-md:mr-8">
+                        <p class="text-[#808080] text-[10px] font-semibold">Bringing together the top songs from an artist.</p>
+                        
+                        <div class="right-area leading-2.5 flex justify-between items-baseline-last">
+                            <p class="text-white font-bold text-2xl max-md:text-[18px]">Best of artists</p>
+                            <p class="text-[#808080] max-md:text-[12px] md:text-[13px] lg:text-[13px] font-bold hover:underline hover:cursor-pointer">Show All</p>
+                        </div>
+                    </div>
+
+                    <div id="second-area" class="relative z-10 flex flex-nowrap overflow-hidden overflow-x-auto no-scrollbar lg:mb-8 md:mb-6 max-md:mb-5">
+                        <div id="card1" class="flex flex-col gap-2 lg:p-3 md:p-3 max-md:p-1.5 hover:bg-[#1f1f1f] rounded-[6px] shrink-0">
+                            <img src="img/covers/cover.jpg" alt="song-poster" class="lg:w-[150px] lg:h-[150px] md:w-[120px] md:h-[120px] max-md:w-[90px] max-md:h-[90px] object-contain rounded-[6px] ">
+    
+                            <p class="text-[#7e7e7e] lg:text-[14px] md:text-[14px] max-md:text-[12px] h-[30px] font-semibold lg:w-[140px] md:w-[110px]  max-md:w-[80px]  overflow-clip line-clamp-2 leading-4">Karan Aujla, Ikky, Nora Fateh, Neha Kakkar</p>
+                        </div>
+    
+                        <div id="card1" class="flex flex-col gap-2 lg:p-3 md:p-3 max-md:p-1.5 hover:bg-[#1f1f1f] rounded-[6px] shrink-0">
+                            <img src="img/covers/cover.jpg" alt="song-poster" class="lg:w-[150px] lg:h-[150px] md:w-[120px] md:h-[120px] max-md:w-[90px] max-md:h-[90px] object-contain rounded-[6px] ">
+    
+                            <p class="text-[#7e7e7e] lg:text-[14px] md:text-[14px] max-md:text-[12px] h-[30px] font-semibold lg:w-[140px] md:w-[110px]  max-md:w-[80px]  overflow-clip line-clamp-2 leading-4">Karan Aujla, Ikky, Nora Fateh, Neha Kakkar</p>
+                        </div>
+    
+                        <div id="card1" class="flex flex-col gap-2 lg:p-3 md:p-3 max-md:p-1.5 hover:bg-[#1f1f1f] rounded-[6px] shrink-0">
+                            <img src="img/covers/cover.jpg" alt="song-poster" class="lg:w-[150px] lg:h-[150px] md:w-[120px] md:h-[120px] max-md:w-[90px] max-md:h-[90px] object-contain rounded-[6px] ">
+    
+                            <p class="text-[#7e7e7e] lg:text-[14px] md:text-[14px] max-md:text-[12px] h-[30px] font-semibold lg:w-[140px] md:w-[110px]  max-md:w-[80px]  overflow-clip line-clamp-2 leading-4">Karan Aujla, Ikky, Nora Fateh, Neha Kakkar</p>
+                        </div>
+    
+                        <div id="card1" class="flex flex-col gap-2 lg:p-3 md:p-3 max-md:p-1.5 hover:bg-[#1f1f1f] rounded-[6px] shrink-0">
+                            <img src="img/covers/cover.jpg" alt="song-poster" class="lg:w-[150px] lg:h-[150px] md:w-[120px] md:h-[120px] max-md:w-[90px] max-md:h-[90px] object-contain rounded-[6px] ">
+    
+                            <p class="text-[#7e7e7e] lg:text-[14px] md:text-[14px] max-md:text-[12px] h-[30px] font-semibold lg:w-[140px] md:w-[110px]  max-md:w-[80px]  overflow-clip line-clamp-2 leading-4">Karan Aujla, Ikky, Nora Fateh, Neha Kakkar</p>
+                        </div>
+                        
+                    </div>
+                </div>
+
+                <div id="sixth-area" class="flex flex-col lg:mb-8 md:mb-6 max-md:mb-5">
+                    <div class="upper-area leading-2.5 flex justify-between items-baseline-last lg:mr-11 md:ml-2.5 md:mr-10 max-md:ml-1.5 max-md:mr-8">
+                        <p class="text-white font-bold text-2xl max-md:text-[18px]">your loved artists</p>
+                        <p class="text-[#808080] max-md:text-[12px] md:text-[13px] lg:text-[13px] font-bold hover:underline hover:cursor-pointer">Show All</p>
+                    </div>
+
+                    <div id="bottom-area" class="relative z-10 flex flex-nowrap overflow-hidden overflow-x-auto no-scrollbar">
+                        
+                        <div id="card1" class="flex flex-col gap-2 lg:p-3 md:p-3 max-md:p-1.5 hover:bg-[#1f1f1f] rounded-[6px] shrink-0">
+                            <img src="img/covers/cover.jpg" alt="song-poster" class="lg:w-[150px] lg:h-[150px] md:w-[120px] md:h-[120px] max-md:w-[90px] max-md:h-[90px] object-contain rounded-full ">
+    
+                            <div id="about" class="leading-4">
+                                <p class="text-white lg:text-[14px] md:text-[14px] max-md:text-[12px] h-[15px] font-semibold lg:w-[140px] md:w-[110px]  max-md:w-[80px]  overflow-clip line-clamp-1">Karan Aujla</p>
+
+                                <p class="text-[#7e7e7e] lg:text-[12px] md:text-[12px] max-md:text-[10px] h-[15px] font-semibold lg:w-[140px] md:w-[110px]  max-md:w-[80px]  overflow-clip line-clamp-1">Artist</p>
+                            </div>
+                        </div>
+
+                        <div id="card1" class="flex flex-col gap-2 lg:p-3 md:p-3 max-md:p-1.5 hover:bg-[#1f1f1f] rounded-[6px] shrink-0">
+                            <img src="img/covers/cover.jpg" alt="song-poster" class="lg:w-[150px] lg:h-[150px] md:w-[120px] md:h-[120px] max-md:w-[90px] max-md:h-[90px] object-contain rounded-full ">
+    
+                            <div id="about" class="leading-4">
+                                <p class="text-white lg:text-[14px] md:text-[14px] max-md:text-[12px] h-[15px] font-semibold lg:w-[140px] md:w-[110px]  max-md:w-[80px]  overflow-clip line-clamp-1">Karan Aujla</p>
+
+                                <p class="text-[#7e7e7e] lg:text-[12px] md:text-[12px] max-md:text-[10px] h-[15px] font-semibold lg:w-[140px] md:w-[110px]  max-md:w-[80px]  overflow-clip line-clamp-1">Artist</p>
+                            </div>
+                        </div>
+
+                        <div id="card1" class="flex flex-col gap-2 lg:p-3 md:p-3 max-md:p-1.5 hover:bg-[#1f1f1f] rounded-[6px] shrink-0">
+                            <img src="img/covers/cover.jpg" alt="song-poster" class="lg:w-[150px] lg:h-[150px] md:w-[120px] md:h-[120px] max-md:w-[90px] max-md:h-[90px] object-contain rounded-full ">
+    
+                            <div id="about" class="leading-4">
+                                <p class="text-white lg:text-[14px] md:text-[14px] max-md:text-[12px] h-[15px] font-semibold lg:w-[140px] md:w-[110px]  max-md:w-[80px]  overflow-clip line-clamp-1">Karan Aujla</p>
+
+                                <p class="text-[#7e7e7e] lg:text-[12px] md:text-[12px] max-md:text-[10px] h-[15px] font-semibold lg:w-[140px] md:w-[110px]  max-md:w-[80px]  overflow-clip line-clamp-1">Artist</p>
+                            </div>
+                        </div>
+
+                        <div id="card1" class="flex flex-col gap-2 lg:p-3 md:p-3 max-md:p-1.5 hover:bg-[#1f1f1f] rounded-[6px] shrink-0">
+                            <img src="img/covers/cover.jpg" alt="song-poster" class="lg:w-[150px] lg:h-[150px] md:w-[120px] md:h-[120px] max-md:w-[90px] max-md:h-[90px] object-contain rounded-full ">
+    
+                            <div id="about" class="leading-4">
+                                <p class="text-white lg:text-[14px] md:text-[14px] max-md:text-[12px] h-[15px] font-semibold lg:w-[140px] md:w-[110px]  max-md:w-[80px]  overflow-clip line-clamp-1">Karan Aujla</p>
+
+                                <p class="text-[#7e7e7e] lg:text-[12px] md:text-[12px] max-md:text-[10px] h-[15px] font-semibold lg:w-[140px] md:w-[110px]  max-md:w-[80px]  overflow-clip line-clamp-1">Artist</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="big-card-container" class="grid lg:grid-cols-2 max-lg:grid-cols-1 max-md:gap-4 md:gap-8 lg:gap-x-0.5 lg:gap-y-6 lg:mb-12 md:mb-10 max-md:mb-8">
+                    
+                    <div id="big-card-base" class="lg:w-[58vw] md:w-[61vw] max-md:w-[78vw] relative">
+                        <div id="upper-black" class=" absolute top-0 left-0 lg:w-[25vw] lg:h-[25vw] md:w-[53vw] md:h-[53vw] max-md:w-[64vw] max-md:h-[64vw] bg-black opacity-60 rounded-[6px]"></div>
+
+
+
+                        <img src="img/covers/cover.jpg" alt="song-image" class="object-cover lg:w-[25vw] lg:h-[25vw] md:w-[53vw] md:h-[53vw] max-md:w-[64vw] max-md:h-[64vw] rounded-[6px]">
+
+                        <div id="upper-area" class="flex gap-2 items-center absolute top-0 left-0 lg:ml-4 lg:mt-4 md:ml-3 md:mt-3 max-md:ml-2 max-md:mt-2">
+                            <img src="img/covers/cover.jpg" alt="song-image" class="lg:w-[70px] lg:h-[70px] md:w-[70px] md:h-[70px] max-md:w-[50px] max-md:h-[50px] rounded-[6px]">
+
+                            <div id="about flex flex-col">
+                                <p class="text-white lg:text-[18px] md:text-[16px] max-md:text-[16px] font-bold">Making Memories</p>
+                                <div class="flex gap-1">
+                                    <p class="text-[#858585] font-semibold lg:text-[14px] md:text[12px] max-md:text-[12px]">Single</p>
+                                    <p class="text-[#858585] font-semibold lg:text-[14px] md:text[12px] max-md:text-[12px]">•</p>
+                                    <p class="text-white font-semibold lg:text-[14px] md:text[12px] max-md:text-[12px]">Karan Aujla</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="bottom-area" class="flex justify-between items-center lg:w-[25vw] md:w-[53vw]  max-md:w-[64vw] lg:px-4 md:px-3  max-md:px-2 lg:pb-4 md:pb-3  max-md:pb-2 absolute bottom-0 left-0">
+                            <button class="bg-black/80 rounded-full min-md:px-3 min-md:py-2 max-md:px-2 max-md:py-1 flex items-center justify-center lg:gap-2 md:gap-2 max-md:gap-1">
+                                <svg data-encore-id="icon" role="img" aria-hidden="true" class="lg:w-4 lg:h-4 md:w-4 md:h-4 max-md:w-3 max-md:h-3 invert e-9812-icon e-9812-baseline" viewBox="0 0 16 16" style="--encore-icon-height: var(--encore-graphic-size-decorative-smaller); --encore-icon-width: var(--encore-graphic-size-decorative-smaller);"><path d="M13.86 5.47a.75.75 0 0 0-1.061 0l-1.47 1.47-1.47-1.47A.75.75 0 0 0 8.8 6.53L10.269 8l-1.47 1.47a.75.75 0 1 0 1.06 1.06l1.47-1.47 1.47 1.47a.75.75 0 0 0 1.06-1.06L12.39 8l1.47-1.47a.75.75 0 0 0 0-1.06z"></path><path d="M10.116 1.5A.75.75 0 0 0 8.991.85l-6.925 4a3.642 3.642 0 0 0-1.33 4.967 3.639 3.639 0 0 0 1.33 1.332l6.925 4a.75.75 0 0 0 1.125-.649v-1.906a4.73 4.73 0 0 1-1.5-.694v1.3L2.817 9.852a2.141 2.141 0 0 1-.781-2.92c.187-.324.456-.594.78-.782l5.8-3.35v1.3c.45-.313.956-.55 1.5-.694V1.5z"></path></svg>
+
+                                <p class="text-white lg:text-[16px] md:text-[14px] max-md:text-[12px] font-semibold">Preview</p>
+                            </button>
+
+                            <div class="flex lg:gap-4 md:gap-3 max-md:gap-2">
+                                <button>
+                                    <svg data-encore-id="icon" role="img" aria-hidden="true" class="three-dots invert lg:w-6 lg:h-6 md:w-5 md:h-5 max-md:w-4 max-md:h-4 e-9812-icon e-9812-baseline" viewBox="0 0 16 16" style="--encore-icon-height: var(--encore-graphic-size-decorative-smaller); --encore-icon-width: var(--encore-graphic-size-decorative-smaller);"><path d="M3 8a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm6.5 0a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zM16 8a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"></path></svg>
+
+                                </button>
+                                
+                                <button>
+                                    <svg data-encore-id="icon" role="img" aria-hidden="true" class="e-9812-icon e-9812-baseline invert lg:w-6 lg:h-6 md:w-5 md:h-5 max-md:w-4 max-md:h-4" viewBox="0 0 16 16" style="--encore-icon-height: var(--encore-graphic-size-decorative-smaller); --encore-icon-width: var(--encore-graphic-size-decorative-smaller);"><path d="M8 1.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8z"></path><path d="M11.75 8a.75.75 0 0 1-.75.75H8.75V11a.75.75 0 0 1-1.5 0V8.75H5a.75.75 0 0 1 0-1.5h2.25V5a.75.75 0 0 1 1.5 0v2.25H11a.75.75 0 0 1 .75.75z"></path></svg>
+                                </button>
+
+                                <button class="lg:w-12 lg:h-12 md:w-10 md:h-10 max-md:w-8 max-md:h-8 rounded-full bg-white flex justify-center items-center">
+                                    <svg data-encore-id="icon" role="img" aria-hidden="true" class="play e-9812-icon e-9812-baseline lg:w-8 lg:h-8 md:w-6 md:h-6 max-md:w-4 max-md:h-4" viewBox="0 0 24 24"><path d="m7.05 3.606 13.49 7.788a.7.7 0 0 1 0 1.212L7.05 20.394A.7.7 0 0 1 6 19.788V4.212a.7.7 0 0 1 1.05-.606z"></path></svg>
+                                </button>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="big-card-base" class="lg:w-[58vw] md:w-[61vw] max-md:w-[78vw] relative">
+                        <div id="upper-black" class=" absolute top-0 left-0 lg:w-[25vw] lg:h-[25vw] md:w-[53vw] md:h-[53vw] max-md:w-[64vw] max-md:h-[64vw] bg-black opacity-60 rounded-[6px]"></div>
+
+
+
+                        <img src="img/covers/cover.jpg" alt="song-image" class="object-cover lg:w-[25vw] lg:h-[25vw] md:w-[53vw] md:h-[53vw] max-md:w-[64vw] max-md:h-[64vw] rounded-[6px]">
+
+                        <div id="upper-area" class="flex gap-2 items-center absolute top-0 left-0 lg:ml-4 lg:mt-4 md:ml-3 md:mt-3 max-md:ml-2 max-md:mt-2">
+                            <img src="img/covers/cover.jpg" alt="song-image" class="lg:w-[70px] lg:h-[70px] md:w-[70px] md:h-[70px] max-md:w-[50px] max-md:h-[50px] rounded-[6px]">
+
+                            <div id="about flex flex-col">
+                                <p class="text-white lg:text-[18px] md:text-[16px] max-md:text-[16px] font-bold">Making Memories</p>
+                                <div class="flex gap-1">
+                                    <p class="text-[#858585] font-semibold lg:text-[14px] md:text[12px] max-md:text-[12px]">Single</p>
+                                    <p class="text-[#858585] font-semibold lg:text-[14px] md:text[12px] max-md:text-[12px]">•</p>
+                                    <p class="text-white font-semibold lg:text-[14px] md:text[12px] max-md:text-[12px]">Karan Aujla</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="bottom-area" class="flex justify-between items-center lg:w-[25vw] md:w-[53vw]  max-md:w-[64vw] lg:px-4 md:px-3  max-md:px-2 lg:pb-4 md:pb-3  max-md:pb-2 absolute bottom-0 left-0">
+                            <button class="bg-black/80 rounded-full min-md:px-3 min-md:py-2 max-md:px-2 max-md:py-1 flex items-center justify-center lg:gap-2 md:gap-2 max-md:gap-1">
+                                <svg data-encore-id="icon" role="img" aria-hidden="true" class="lg:w-4 lg:h-4 md:w-4 md:h-4 max-md:w-3 max-md:h-3 invert e-9812-icon e-9812-baseline" viewBox="0 0 16 16" style="--encore-icon-height: var(--encore-graphic-size-decorative-smaller); --encore-icon-width: var(--encore-graphic-size-decorative-smaller);"><path d="M13.86 5.47a.75.75 0 0 0-1.061 0l-1.47 1.47-1.47-1.47A.75.75 0 0 0 8.8 6.53L10.269 8l-1.47 1.47a.75.75 0 1 0 1.06 1.06l1.47-1.47 1.47 1.47a.75.75 0 0 0 1.06-1.06L12.39 8l1.47-1.47a.75.75 0 0 0 0-1.06z"></path><path d="M10.116 1.5A.75.75 0 0 0 8.991.85l-6.925 4a3.642 3.642 0 0 0-1.33 4.967 3.639 3.639 0 0 0 1.33 1.332l6.925 4a.75.75 0 0 0 1.125-.649v-1.906a4.73 4.73 0 0 1-1.5-.694v1.3L2.817 9.852a2.141 2.141 0 0 1-.781-2.92c.187-.324.456-.594.78-.782l5.8-3.35v1.3c.45-.313.956-.55 1.5-.694V1.5z"></path></svg>
+
+                                <p class="text-white lg:text-[16px] md:text-[14px] max-md:text-[12px] font-semibold">Preview</p>
+                            </button>
+
+                            <div class="flex lg:gap-4 md:gap-3 max-md:gap-2">
+                                <button>
+                                    <svg data-encore-id="icon" role="img" aria-hidden="true" class="three-dots invert lg:w-6 lg:h-6 md:w-5 md:h-5 max-md:w-4 max-md:h-4 e-9812-icon e-9812-baseline" viewBox="0 0 16 16" style="--encore-icon-height: var(--encore-graphic-size-decorative-smaller); --encore-icon-width: var(--encore-graphic-size-decorative-smaller);"><path d="M3 8a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm6.5 0a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zM16 8a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"></path></svg>
+
+                                </button>
+                                
+                                <button>
+                                    <svg data-encore-id="icon" role="img" aria-hidden="true" class="e-9812-icon e-9812-baseline invert lg:w-6 lg:h-6 md:w-5 md:h-5 max-md:w-4 max-md:h-4" viewBox="0 0 16 16" style="--encore-icon-height: var(--encore-graphic-size-decorative-smaller); --encore-icon-width: var(--encore-graphic-size-decorative-smaller);"><path d="M8 1.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8z"></path><path d="M11.75 8a.75.75 0 0 1-.75.75H8.75V11a.75.75 0 0 1-1.5 0V8.75H5a.75.75 0 0 1 0-1.5h2.25V5a.75.75 0 0 1 1.5 0v2.25H11a.75.75 0 0 1 .75.75z"></path></svg>
+                                </button>
+
+                                <button class="lg:w-12 lg:h-12 md:w-10 md:h-10 max-md:w-8 max-md:h-8 rounded-full bg-white flex justify-center items-center">
+                                    <svg data-encore-id="icon" role="img" aria-hidden="true" class="play e-9812-icon e-9812-baseline lg:w-8 lg:h-8 md:w-6 md:h-6 max-md:w-4 max-md:h-4" viewBox="0 0 24 24"><path d="m7.05 3.606 13.49 7.788a.7.7 0 0 1 0 1.212L7.05 20.394A.7.7 0 0 1 6 19.788V4.212a.7.7 0 0 1 1.05-.606z"></path></svg>
+                                </button>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="big-card-base" class="lg:w-[58vw] md:w-[61vw] max-md:w-[78vw] relative">
+                        <div id="upper-black" class=" absolute top-0 left-0 lg:w-[25vw] lg:h-[25vw] md:w-[53vw] md:h-[53vw] max-md:w-[64vw] max-md:h-[64vw] bg-black opacity-60 rounded-[6px]"></div>
+
+
+
+                        <img src="img/covers/cover.jpg" alt="song-image" class="object-cover lg:w-[25vw] lg:h-[25vw] md:w-[53vw] md:h-[53vw] max-md:w-[64vw] max-md:h-[64vw] rounded-[6px]">
+
+                        <div id="upper-area" class="flex gap-2 items-center absolute top-0 left-0 lg:ml-4 lg:mt-4 md:ml-3 md:mt-3 max-md:ml-2 max-md:mt-2">
+                            <img src="img/covers/cover.jpg" alt="song-image" class="lg:w-[70px] lg:h-[70px] md:w-[70px] md:h-[70px] max-md:w-[50px] max-md:h-[50px] rounded-[6px]">
+
+                            <div id="about flex flex-col">
+                                <p class="text-white lg:text-[18px] md:text-[16px] max-md:text-[16px] font-bold">Making Memories</p>
+                                <div class="flex gap-1">
+                                    <p class="text-[#858585] font-semibold lg:text-[14px] md:text[12px] max-md:text-[12px]">Single</p>
+                                    <p class="text-[#858585] font-semibold lg:text-[14px] md:text[12px] max-md:text-[12px]">•</p>
+                                    <p class="text-white font-semibold lg:text-[14px] md:text[12px] max-md:text-[12px]">Karan Aujla</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="bottom-area" class="flex justify-between items-center lg:w-[25vw] md:w-[53vw]  max-md:w-[64vw] lg:px-4 md:px-3  max-md:px-2 lg:pb-4 md:pb-3  max-md:pb-2 absolute bottom-0 left-0">
+                            <button class="bg-black/80 rounded-full min-md:px-3 min-md:py-2 max-md:px-2 max-md:py-1 flex items-center justify-center lg:gap-2 md:gap-2 max-md:gap-1">
+                                <svg data-encore-id="icon" role="img" aria-hidden="true" class="lg:w-4 lg:h-4 md:w-4 md:h-4 max-md:w-3 max-md:h-3 invert e-9812-icon e-9812-baseline" viewBox="0 0 16 16" style="--encore-icon-height: var(--encore-graphic-size-decorative-smaller); --encore-icon-width: var(--encore-graphic-size-decorative-smaller);"><path d="M13.86 5.47a.75.75 0 0 0-1.061 0l-1.47 1.47-1.47-1.47A.75.75 0 0 0 8.8 6.53L10.269 8l-1.47 1.47a.75.75 0 1 0 1.06 1.06l1.47-1.47 1.47 1.47a.75.75 0 0 0 1.06-1.06L12.39 8l1.47-1.47a.75.75 0 0 0 0-1.06z"></path><path d="M10.116 1.5A.75.75 0 0 0 8.991.85l-6.925 4a3.642 3.642 0 0 0-1.33 4.967 3.639 3.639 0 0 0 1.33 1.332l6.925 4a.75.75 0 0 0 1.125-.649v-1.906a4.73 4.73 0 0 1-1.5-.694v1.3L2.817 9.852a2.141 2.141 0 0 1-.781-2.92c.187-.324.456-.594.78-.782l5.8-3.35v1.3c.45-.313.956-.55 1.5-.694V1.5z"></path></svg>
+
+                                <p class="text-white lg:text-[16px] md:text-[14px] max-md:text-[12px] font-semibold">Preview</p>
+                            </button>
+
+                            <div class="flex lg:gap-4 md:gap-3 max-md:gap-2">
+                                <button>
+                                    <svg data-encore-id="icon" role="img" aria-hidden="true" class="three-dots invert lg:w-6 lg:h-6 md:w-5 md:h-5 max-md:w-4 max-md:h-4 e-9812-icon e-9812-baseline" viewBox="0 0 16 16" style="--encore-icon-height: var(--encore-graphic-size-decorative-smaller); --encore-icon-width: var(--encore-graphic-size-decorative-smaller);"><path d="M3 8a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm6.5 0a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zM16 8a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"></path></svg>
+
+                                </button>
+                                
+                                <button>
+                                    <svg data-encore-id="icon" role="img" aria-hidden="true" class="e-9812-icon e-9812-baseline invert lg:w-6 lg:h-6 md:w-5 md:h-5 max-md:w-4 max-md:h-4" viewBox="0 0 16 16" style="--encore-icon-height: var(--encore-graphic-size-decorative-smaller); --encore-icon-width: var(--encore-graphic-size-decorative-smaller);"><path d="M8 1.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8z"></path><path d="M11.75 8a.75.75 0 0 1-.75.75H8.75V11a.75.75 0 0 1-1.5 0V8.75H5a.75.75 0 0 1 0-1.5h2.25V5a.75.75 0 0 1 1.5 0v2.25H11a.75.75 0 0 1 .75.75z"></path></svg>
+                                </button>
+
+                                <button class="lg:w-12 lg:h-12 md:w-10 md:h-10 max-md:w-8 max-md:h-8 rounded-full bg-white flex justify-center items-center">
+                                    <svg data-encore-id="icon" role="img" aria-hidden="true" class="play e-9812-icon e-9812-baseline lg:w-8 lg:h-8 md:w-6 md:h-6 max-md:w-4 max-md:h-4" viewBox="0 0 24 24"><path d="m7.05 3.606 13.49 7.788a.7.7 0 0 1 0 1.212L7.05 20.394A.7.7 0 0 1 6 19.788V4.212a.7.7 0 0 1 1.05-.606z"></path></svg>
+                                </button>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="big-card-base" class="lg:w-[58vw] md:w-[61vw] max-md:w-[78vw] relative">
+                        <div id="upper-black" class=" absolute top-0 left-0 lg:w-[25vw] lg:h-[25vw] md:w-[53vw] md:h-[53vw] max-md:w-[64vw] max-md:h-[64vw] bg-black opacity-60 rounded-[6px]"></div>
+
+
+
+                        <img src="img/covers/cover.jpg" alt="song-image" class="object-cover lg:w-[25vw] lg:h-[25vw] md:w-[53vw] md:h-[53vw] max-md:w-[64vw] max-md:h-[64vw] rounded-[6px]">
+
+                        <div id="upper-area" class="flex gap-2 items-center absolute top-0 left-0 lg:ml-4 lg:mt-4 md:ml-3 md:mt-3 max-md:ml-2 max-md:mt-2">
+                            <img src="img/covers/cover.jpg" alt="song-image" class="lg:w-[70px] lg:h-[70px] md:w-[70px] md:h-[70px] max-md:w-[50px] max-md:h-[50px] rounded-[6px]">
+
+                            <div id="about flex flex-col">
+                                <p class="text-white lg:text-[18px] md:text-[16px] max-md:text-[16px] font-bold">Making Memories</p>
+                                <div class="flex gap-1">
+                                    <p class="text-[#858585] font-semibold lg:text-[14px] md:text[12px] max-md:text-[12px]">Single</p>
+                                    <p class="text-[#858585] font-semibold lg:text-[14px] md:text[12px] max-md:text-[12px]">•</p>
+                                    <p class="text-white font-semibold lg:text-[14px] md:text[12px] max-md:text-[12px]">Karan Aujla</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="bottom-area" class="flex justify-between items-center lg:w-[25vw] md:w-[53vw]  max-md:w-[64vw] lg:px-4 md:px-3  max-md:px-2 lg:pb-4 md:pb-3  max-md:pb-2 absolute bottom-0 left-0">
+                            <button class="bg-black/80 rounded-full min-md:px-3 min-md:py-2 max-md:px-2 max-md:py-1 flex items-center justify-center lg:gap-2 md:gap-2 max-md:gap-1">
+                                <svg data-encore-id="icon" role="img" aria-hidden="true" class="lg:w-4 lg:h-4 md:w-4 md:h-4 max-md:w-3 max-md:h-3 invert e-9812-icon e-9812-baseline" viewBox="0 0 16 16" style="--encore-icon-height: var(--encore-graphic-size-decorative-smaller); --encore-icon-width: var(--encore-graphic-size-decorative-smaller);"><path d="M13.86 5.47a.75.75 0 0 0-1.061 0l-1.47 1.47-1.47-1.47A.75.75 0 0 0 8.8 6.53L10.269 8l-1.47 1.47a.75.75 0 1 0 1.06 1.06l1.47-1.47 1.47 1.47a.75.75 0 0 0 1.06-1.06L12.39 8l1.47-1.47a.75.75 0 0 0 0-1.06z"></path><path d="M10.116 1.5A.75.75 0 0 0 8.991.85l-6.925 4a3.642 3.642 0 0 0-1.33 4.967 3.639 3.639 0 0 0 1.33 1.332l6.925 4a.75.75 0 0 0 1.125-.649v-1.906a4.73 4.73 0 0 1-1.5-.694v1.3L2.817 9.852a2.141 2.141 0 0 1-.781-2.92c.187-.324.456-.594.78-.782l5.8-3.35v1.3c.45-.313.956-.55 1.5-.694V1.5z"></path></svg>
+
+                                <p class="text-white lg:text-[16px] md:text-[14px] max-md:text-[12px] font-semibold">Preview</p>
+                            </button>
+
+                            <div class="flex lg:gap-4 md:gap-3 max-md:gap-2">
+                                <button>
+                                    <svg data-encore-id="icon" role="img" aria-hidden="true" class="three-dots invert lg:w-6 lg:h-6 md:w-5 md:h-5 max-md:w-4 max-md:h-4 e-9812-icon e-9812-baseline" viewBox="0 0 16 16" style="--encore-icon-height: var(--encore-graphic-size-decorative-smaller); --encore-icon-width: var(--encore-graphic-size-decorative-smaller);"><path d="M3 8a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm6.5 0a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zM16 8a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"></path></svg>
+
+                                </button>
+                                
+                                <button>
+                                    <svg data-encore-id="icon" role="img" aria-hidden="true" class="e-9812-icon e-9812-baseline invert lg:w-6 lg:h-6 md:w-5 md:h-5 max-md:w-4 max-md:h-4" viewBox="0 0 16 16" style="--encore-icon-height: var(--encore-graphic-size-decorative-smaller); --encore-icon-width: var(--encore-graphic-size-decorative-smaller);"><path d="M8 1.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8z"></path><path d="M11.75 8a.75.75 0 0 1-.75.75H8.75V11a.75.75 0 0 1-1.5 0V8.75H5a.75.75 0 0 1 0-1.5h2.25V5a.75.75 0 0 1 1.5 0v2.25H11a.75.75 0 0 1 .75.75z"></path></svg>
+                                </button>
+
+                                <button class="lg:w-12 lg:h-12 md:w-10 md:h-10 max-md:w-8 max-md:h-8 rounded-full bg-white flex justify-center items-center">
+                                    <svg data-encore-id="icon" role="img" aria-hidden="true" class="play e-9812-icon e-9812-baseline lg:w-8 lg:h-8 md:w-6 md:h-6 max-md:w-4 max-md:h-4" viewBox="0 0 24 24"><path d="m7.05 3.606 13.49 7.788a.7.7 0 0 1 0 1.212L7.05 20.394A.7.7 0 0 1 6 19.788V4.212a.7.7 0 0 1 1.05-.606z"></path></svg>
+                                </button>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <footer id="links-area" class="flex flex-col justify-center items-center">
+                    <div id="grid-area" class="grid grid-cols-4 lg:mr-10 md:mr-8 max-md:mr-6 lg:mb-8 md:mb-6 max-md:mb-4">
+                        <ul class="list-none">
+                            <li class="text-white font-bold lg:text-[16px] md:text-[14px] max-md:text-[10px]">Company</li>
+                            <li class="text-[#858585] font-semibold lg:text-[16px] md:text-[14px] max-md:text-[10px]">About</li>
+                            <li class="text-[#858585] font-semibold lg:text-[16px] md:text-[14px] max-md:text-[10px]">Jobs</li>
+                            <li class="text-[#858585] font-semibold lg:text-[16px] md:text-[14px] max-md:text-[10px]">For the record</li>
+                        </ul>
+
+                        <ul class="list-none">
+                            <li class="text-white font-bold lg:text-[16px] md:text-[14px] max-md:text-[10px]">Comunities</li>
+                            <li class="text-[#858585] font-semibold lg:text-[16px] md:text-[14px] max-md:text-[10px]">For artists</li>
+                            <li class="text-[#858585] font-semibold lg:text-[16px] md:text-[14px] max-md:text-[10px]">Developers</li>
+                            <li class="text-[#858585] font-semibold lg:text-[16px] md:text-[14px] max-md:text-[10px]">Advertising</li>
+                            <li class="text-[#858585] font-semibold lg:text-[16px] md:text-[14px] max-md:text-[10px]">Investors</li>
+                            <li class="text-[#858585] font-semibold lg:text-[16px] md:text-[14px] max-md:text-[10px]">vendors</li>
+                        </ul>
+
+                        <ul class="list-none">
+                            <li class="text-white font-bold lg:text-[16px] md:text-[14px] max-md:text-[10px]">Usefull Links</li>
+                            <li class="text-[#858585] font-semibold lg:text-[16px] md:text-[14px] max-md:text-[10px]">Support</li>
+                            <li class="text-[#858585] font-semibold lg:text-[16px] md:text-[14px] max-md:text-[10px]">Free mobile app</li>
+                        </ul>
+
+                        <ul class="list-none">
+                            <li class="text-white font-bold lg:text-[16px] md:text-[14px] max-md:text-[10px]">Spotify Plans</li>
+                            <li class="text-[#858585] font-semibold lg:text-[16px] md:text-[14px] max-md:text-[10px]">Premium individual</li>
+                            <li class="text-[#858585] font-semibold lg:text-[16px] md:text-[14px] max-md:text-[10px]">Premium duo</li>
+                            <li class="text-[#858585] font-semibold lg:text-[16px] md:text-[14px] max-md:text-[10px]">Premium family</li>
+                            <li class="text-[#858585] font-semibold lg:text-[16px] md:text-[14px] max-md:text-[10px]">Premium student</li>
+                            <li class="text-[#858585] font-semibold lg:text-[16px] md:text-[14px] max-md:text-[10px]">Spotify free</li>
+                        </ul>
+                    </div>
+
+                    <div id="links-button-area" class="flex lg:gap-6 md:gap-4 max-md:gap-2 lg:mb-8 md:mb-6 max-md:mb-4">
+                        <button class="bg-[#292929] lg:w-10 lg:h-10 md:w-9 md:h-9 max-md:w-8 max-md:h-8 rounded-full flex justify-center items-center">
+                            <svg data-encore-id="icon" role="img" aria-hidden="true" class="invert lg:w-5 lg:h-5 md:w-4 md:h-4 max-md:w-4 max-md:h-4 e-9812-icon e-9812-baseline" viewBox="0 0 16 16" style="--encore-icon-fill: var(--text-base, #000000); --encore-icon-height: var(--encore-graphic-size-decorative-smaller); --encore-icon-width: var(--encore-graphic-size-decorative-smaller);"><path d="M8 1.44c2.136 0 2.389.009 3.233.047.78.036 1.203.166 1.485.276.348.128.663.332.921.598.266.258.47.573.599.921.11.282.24.706.275 1.485.039.844.047 1.097.047 3.233s-.008 2.389-.047 3.232c-.035.78-.166 1.204-.275 1.486a2.654 2.654 0 0 1-1.518 1.518c-.282.11-.706.24-1.486.275-.843.039-1.097.047-3.233.047s-2.39-.008-3.232-.047c-.78-.035-1.204-.165-1.486-.275a2.477 2.477 0 0 1-.921-.599 2.477 2.477 0 0 1-.599-.92c-.11-.282-.24-.706-.275-1.486-.038-.844-.047-1.096-.047-3.232s.009-2.39.047-3.233c.036-.78.166-1.203.275-1.485.129-.348.333-.663.599-.921a2.49 2.49 0 0 1 .92-.599c.283-.11.707-.24 1.487-.275.843-.038 1.096-.047 3.232-.047L8 1.441zm.001-1.442c-2.172 0-2.445.01-3.298.048-.854.04-1.435.176-1.943.373a3.928 3.928 0 0 0-1.417.923c-.407.4-.722.883-.923 1.417-.198.508-.333 1.09-.372 1.942C.01 5.552 0 5.826 0 8c0 2.172.01 2.445.048 3.298.04.853.174 1.433.372 1.941.2.534.516 1.017.923 1.417.4.407.883.722 1.417.923.508.198 1.09.333 1.942.372.852.039 1.126.048 3.299.048 2.172 0 2.445-.01 3.298-.048.853-.04 1.433-.174 1.94-.372a4.087 4.087 0 0 0 2.34-2.34c.199-.508.334-1.09.373-1.942.039-.851.048-1.125.048-3.298s-.01-2.445-.048-3.298c-.04-.853-.174-1.433-.372-1.94a3.924 3.924 0 0 0-.923-1.418A3.928 3.928 0 0 0 13.24.42c-.508-.197-1.09-.333-1.942-.371-.851-.041-1.125-.05-3.298-.05l.001-.001z"></path><path d="M8 3.892a4.108 4.108 0 1 0 0 8.216 4.108 4.108 0 0 0 0-8.216zm0 6.775a2.668 2.668 0 1 1 0-5.335 2.668 2.668 0 0 1 0 5.335zm4.27-5.978a.96.96 0 1 0 0-1.92.96.96 0 0 0 0 1.92z"></path></svg>
+
+                        </button>
+
+                        <button class="bg-[#292929] lg:w-10 lg:h-10 md:w-9 md:h-9 max-md:w-8 max-md:h-8 rounded-full flex justify-center items-center">
+                            <svg data-encore-id="icon" role="img" aria-hidden="true" class="invert lg:w-5 lg:h-5 md:w-4 md:h-4 max-md:w-4 max-md:h-4 e-9812-icon e-9812-baseline" viewBox="0 0 16 16" style="--encore-icon-fill: var(--text-base, #000000); --encore-icon-height: var(--encore-graphic-size-decorative-smaller); --encore-icon-width: var(--encore-graphic-size-decorative-smaller);"><path d="M13.54 3.889a2.968 2.968 0 0 0 1.333-1.683 5.937 5.937 0 0 1-1.929.738 2.992 2.992 0 0 0-.996-.706 2.98 2.98 0 0 0-1.218-.254 2.92 2.92 0 0 0-2.143.889 2.929 2.929 0 0 0-.889 2.15c0 .212.027.442.08.691a8.475 8.475 0 0 1-3.484-.932A8.536 8.536 0 0 1 1.532 2.54a2.993 2.993 0 0 0-.413 1.523c0 .519.12 1 .361 1.445.24.445.57.805.988 1.08a2.873 2.873 0 0 1-1.373-.374v.04c0 .725.23 1.365.69 1.92a2.97 2.97 0 0 0 1.739 1.048 2.937 2.937 0 0 1-1.365.056 2.94 2.94 0 0 0 1.063 1.5 2.945 2.945 0 0 0 1.77.603 5.944 5.944 0 0 1-3.77 1.302c-.243 0-.484-.016-.722-.048A8.414 8.414 0 0 0 5.15 14c.905 0 1.763-.12 2.572-.361.81-.24 1.526-.57 2.147-.988a9.044 9.044 0 0 0 1.683-1.46c.5-.556.911-1.155 1.234-1.798a9.532 9.532 0 0 0 .738-1.988 8.417 8.417 0 0 0 .246-2.429 6.177 6.177 0 0 0 1.508-1.563c-.56.249-1.14.407-1.738.476z"></path></svg>
+                        </button>
+
+                        <button class="bg-[#292929] lg:w-10 lg:h-10 md:w-9 md:h-9 max-md:w-8 max-md:h-8 rounded-full flex justify-center items-center">
+                            <svg data-encore-id="icon" role="img" aria-hidden="true" class="invert lg:w-5 lg:h-5 md:w-4 md:h-4 max-md:w-4 max-md:h-4 e-9812-icon e-9812-baseline" viewBox="0 0 16 16" style="--encore-icon-height: var(--encore-graphic-size-decorative-smaller); --encore-icon-width: var(--encore-graphic-size-decorative-smaller);"><path d="M16 8a8 8 0 1 0-9.25 7.903v-5.59H4.719V8H6.75V6.237c0-2.005 1.194-3.112 3.022-3.112.875 0 1.79.156 1.79.156V5.25h-1.008c-.994 0-1.304.617-1.304 1.25V8h2.219l-.355 2.313H9.25v5.59A8.002 8.002 0 0 0 16 8z"></path></svg>
+    
+                        </button>
+                    </div>
+
+                    <div class="lg:w-[58vw] md:w-[61vw] max-md:w-[78vw] flex justify-center items-center lg:mb-8 md:mb-6 max-md:mb-4">
+                        <hr class="border-[1px] border-[#858585] lg:w-[50vw] md:w-[53vw] max-md:w-[62vw] lg:mr-8 md:mr-10 max-md:mr-6">
+                    </div>
+
+                    <div class="last flex lg:flex-row max-lg:flex-col lg:gap-2 max-lg:gap-2 lg:mr-8 md:mr-2 max-md:mr-4 lg:mb-8 md:mb-6 max-md:mb-4">
+                        <ul class="list-none flex gap-3">
+                            <li class="text-[#858585] font-semibold lg:text-[15px] md:text-[13px] max-md:text-[9px]">Legal</li>
+                            <li class="text-[#858585] font-semibold lg:text-[15px] md:text-[13px] max-md:text-[9px]">Safety & Privacy Center</li>
+                            <li class="text-[#858585] font-semibold lg:text-[15px] md:text-[13px] max-md:text-[9px]">Privacy Policy</li>
+                            <li class="text-[#858585] font-semibold lg:text-[15px] md:text-[13px] max-md:text-[9px]">Cookies</li>
+                        </ul>
+
+                        <ul class="list-none flex gap-3">
+                            <li class="text-[#858585] font-semibold lg:text-[15px] md:text-[13px] max-md:text-[9px]">About <A:blank></A:blank>ds</li>
+                            <li class="text-[#858585] font-semibold lg:text-[15px] md:text-[13px] max-md:text-[9px]">Accessibility</li>
+                            <li class="text-[#858585] font-semibold lg:text-[15px] md:text-[13px] max-md:text-[9px]">© 2025 Spotify AB</li>
+                            
+                        </ul>
+                    </div>
+                </footer>
+
+            </section>
+    
+            <section id="right-main-section" class="bg-[#121212] md:w-[28vw] md:h-[77vh] lg:w-[21.5vw] lg:h-[78vh] rounded-[6px] relative overflow-clip lg:px-4 md:px-2 max-md:px-2 max-md:py-4 lg:py-3 md:py-5 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-gray-300">
+                <video src="img/vid.mp4" autoplay muted loop class="lg:max-w-[110vh] md:max-w-[70vh] absolute top-0 left-[-60%]"></video>
+                <div class=" bg-black/50 absolute top-0 left-0 md:w-[28vw] md:h-[39.5vh] lg:w-[21.5vw] lg:h-[62vh]">
+                </div>
+
+                <div class="flex justify-between items-center lg:mb-3.5 md:mb-3 relative z-10">
+                    <div class="left-side flex justify-center items-center lg:gap-3 md:gap-3">
+                        <button id="library-open">
+                            <svg data-encore-id="icon" role="img" aria-hidden="true" class="invert lg:w-5 lg:h-5 md:w-5 md:h-5 e-9812-icon e-9812-baseline e-9812-icon--auto-mirror" viewBox="0 0 16 16" style="--encore-icon-height: var(--encore-graphic-size-decorative-smaller); --encore-icon-width: var(--encore-graphic-size-decorative-smaller);"><path d="M10.97 5.47a.75.75 0 1 1 1.06 1.06L10.56 8l1.47 1.47a.75.75 0 1 1-1.06 1.06l-2-2a.75.75 0 0 1 0-1.06l2-2Z"></path><path d="M1 0a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V1a1 1 0 0 0-1-1H1Zm.5 1.5H5v13H1.5v-13Zm13 13h-8v-13h8v13Z"></path></svg>
+                        </button>
+            
+                        <p class="text-white text-[16px] font-bold hover:underline md:overflow-hidden md:text-ellipsis md:w-[100px] md:h-[20px] md:line-clamp-1">Die With A Smile</p>
+                    </div>
+            
+                    <div class="right-side flex justify-center items-center lg:gap-4 md:gap-4">
+                        <button>
+                            <svg data-encore-id="icon" role="img" aria-hidden="true" class="three-dots invert lg:w-4 lg:h-4 md:w-4 md:h-4 e-9812-icon e-9812-baseline" viewBox="0 0 16 16" style="--encore-icon-height: var(--encore-graphic-size-decorative-smaller); --encore-icon-width: var(--encore-graphic-size-decorative-smaller);"><path d="M3 8a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm6.5 0a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zM16 8a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"></path></svg>
+                        </button>
+            
+                        <button id="resize">
+                            <svg data-encore-id="icon" role="img" aria-hidden="true" class="invert lg:w-4 lg:h-4 md:w-4 md:h-4 max-md:w-3 max-md:h-3 e-9812-icon e-9812-baseline" viewBox="0 0 16 16" style="--encore-icon-height: var(--encore-graphic-size-decorative-smaller); --encore-icon-width: var(--encore-graphic-size-decorative-smaller);"><path d="M6.53 9.47a.75.75 0 0 1 0 1.06l-2.72 2.72h1.018a.75.75 0 0 1 0 1.5H1.25v-3.579a.75.75 0 0 1 1.5 0v1.018l2.72-2.72a.75.75 0 0 1 1.06 0zm2.94-2.94a.75.75 0 0 1 0-1.06l2.72-2.72h-1.018a.75.75 0 1 1 0-1.5h3.578v3.579a.75.75 0 0 1-1.5 0V3.81l-2.72 2.72a.75.75 0 0 1-1.06 0z"></path></svg>
+            
+                        </button>
+                    </div>
+                </div>
+
+                <div class="area-cover md:w-[28vw] md:h-[18vh] lg:w-[21.5vw] lg:h-[42vh]"></div>
+
+                <div class="bottom-area relative z-10 flex justify-between mb-6">
+                    <div class="left-area leading-6">
+                        <p class="text-white lg:text-[24px] md:text-[22px] font-bold">Die With A Smile</p>
+                        <p class="text-[#8c8c8c] lg:text-[16px] md:text-[14px] font-semibold">Bruno Mars, Lady Gaga</p>
+                    </div>
+
+                    <div class="button-area flex justify-center items-center lg:gap-3 md:gap-2">
+                        <button>
+                            <svg data-encore-id="icon" role="img" aria-hidden="true" class="invert lg:w-4 lg:h-4 md:w-4 md:h-4 e-9812-icon e-9812-baseline" viewBox="0 0 16 16" style="--encore-icon-height: var(--encore-graphic-size-decorative-smaller); --encore-icon-width: var(--encore-graphic-size-decorative-smaller);"><path d="M1 5.75A.75.75 0 0 1 1.75 5H4v1.5H2.5v8h11v-8H12V5h2.25a.75.75 0 0 1 .75.75v9.5a.75.75 0 0 1-.75.75H1.75a.75.75 0 0 1-.75-.75v-9.5z"></path><path d="M8 9.576a.75.75 0 0 0 .75-.75V2.903l1.454 1.454a.75.75 0 0 0 1.06-1.06L8 .03 4.735 3.296a.75.75 0 0 0 1.06 1.061L7.25 2.903v5.923c0 .414.336.75.75.75z"></path></svg>
+                        </button>
+
+                        <button>
+                            <svg data-encore-id="icon" role="img" aria-hidden="true" class="invert lg:w-4 lg:h-4 md:w-4 md:h-4 e-9812-icon e-9812-baseline" viewBox="0 0 16 16" style="--encore-icon-height: var(--encore-graphic-size-decorative-smaller); --encore-icon-width: var(--encore-graphic-size-decorative-smaller);"><path d="M8 1.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8z"></path><path d="M11.75 8a.75.75 0 0 1-.75.75H8.75V11a.75.75 0 0 1-1.5 0V8.75H5a.75.75 0 0 1 0-1.5h2.25V5a.75.75 0 0 1 1.5 0v2.25H11a.75.75 0 0 1 .75.75z"></path></svg>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="card bg-[#1f1f1f] relative z-10 rounded-[6px] mb-4 pb-2">
+                    <img src="img/covers/ladyGaga.jpg" alt="singer-image" class="w-[54vw] lg:h-[24vh] md:h-[15vw] object-cover rounded-[6px]">
+
+                    <div class="glass bg-black/30 w-[54vw]  lg:h-[24vh] md:h-[15vw] absolute top-0 left-0"></div>
+
+                    <div class="upper-box absolute top-0 left-0 pl-4 pt-4">
+                        <p class="text-white font-semibold text-[16px]">About the artist</p>
+                    </div>
+
+                    <div class="bottom-box flex flex-col gap-2 px-4 pt-2">
+                        <p class="text-white font-semibold text-[16px]">Lady Gaga</p>
+
+                        <div class="about flex justify-between items-center">
+                            <p class="text-[#858585] font-semibold text-[16px]">114,107,683 <br> monthly listeners</p>
+                            <button class="border-[0.5px] border-white text-white font-semibold text-[15px] px-3 py-1 rounded-full">Follow</button>
+                        </div>
+
+                        <p class="text-[#858585] font-semibold text-[16px] overflow-clip text-ellipsis lg:line-clamp-3 md:line-clamp-2 lg:h-[70px] md:h-[50px]">Academy Award and 14-time GRAMMY-winner Lady Gaga is a one-of-a-kind artist and performer.</p>
+                    </div>
+
+                </div>
+
+                <div class="credits-box bg-[#1f1f1f] rounded-[6px] px-4 py-4 flex flex-col mb-4 lg:gap-4 md:gap-3">
+                    <div class="first-area flex justify-between items-baseline-last">
+                        <p class="text-[16px] font-bold text-white">Credits</p>
+                        <p class="text-[14px] font-bold text-[#858585]">Show all</p>
+                    </div>
+
+                    <div class="second-area flex justify-between items-center">
+                        <div class="left-side">
+                            <p class="text-[16px] font-semibold text-white">Lady Gaga</p>
+                            <p class="text-[14px] font-bold text-[#858585]">Main Artist,</p>
+                            <p class="text-[14px] font-bold text-[#858585]">Composer,</p>
+                            <p class="text-[14px] font-bold text-[#858585]">Producer</p>
+                        </div>
+
+                        <button class="border-[0.5px] border-white text-white font-semibold text-[15px] px-3 py-1 rounded-full">Follow</button>
+                    </div>
+
+                    <div class="third-area flex justify-between items-center">
+                        <div class="left-side">
+                            <p class="text-[16px] font-semibold text-white">Bruno Mars</p>
+                            <p class="text-[14px] font-bold text-[#858585]">Main Artist,</p>
+                            <p class="text-[14px] font-bold text-[#858585]">Composer,</p>
+                            <p class="text-[14px] font-bold text-[#858585]">Producer</p>
+                        </div>
+
+                        <button class="border-[0.5px] border-white text-white font-semibold text-[15px] px-3 py-1 rounded-full">Follow</button>
+                    </div>
+
+                    <div class="fourth-area">
+                        <p class="text-[16px] font-semibold text-white">Dernst "D'Mile" Emile II</p>
+                        <p class="text-[14px] font-bold text-[#858585]">Composer, Producer</p>
+                    </div>
+                </div>
+
+                <div class="tour-area bg-[#1f1f1f] rounded-[6px] px-4 py-4 flex flex-col mb-4 lg:gap-4 md:gap-3">
+                    <div class="first-area flex justify-between items-baseline-last">
+                        <p class="text-[16px] font-bold text-white">On tour</p>
+                        <p class="text-[14px] font-bold text-[#858585]">Show all</p>
+                    </div>
+
+                    <div class="second-area flex gap-4 items-center">
+                        <div class="box leading-5 bg-black/40 w-[60px] h-[60px] rounded flex flex-col justify-center items-center shrink-0">
+                            <p class="text-white font-extrabold text-[12px]">May</p>
+                            <p class="text-white font-extrabold text-[30px]">3</p>
+                        </div>
+
+                        <div class="content leading-4">
+                            <p class="text-[16px] font-semibold text-white ">Reo De Janiero</p>
+                            <p class="text-[15px] font-semibold text-[#858585]">Lady Gaga</p>
+                            <p class="text-[15px] font-semibold text-[#858585]">Sat 9:00 AM</p>
+                        </div>
+                    </div>
+
+                    <div class="second-area flex gap-4 items-center">
+                        <div class="box leading-5 bg-black/40 w-[60px] h-[60px] rounded flex flex-col justify-center items-center shrink-0">
+                            <p class="text-white font-extrabold text-[12px]">May</p>
+                            <p class="text-white font-extrabold text-[30px]">13</p>
+                        </div>
+
+                        <div class="content leading-4">
+                            <p class="text-[16px] font-semibold text-white">Singapore</p>
+                            <p class="text-[15px] font-semibold text-[#858585]">Lady Gaga</p>
+                            <p class="text-[15px] font-semibold text-[#858585]">Sat 9:00 AM</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="queue-area bg-[#1f1f1f] rounded-[6px] px-4 py-4 flex flex-col justify-between mb-2 lg:gap-4 md:gap-3">
+                    <div class="first-area flex justify-between items-baseline-last">
+                        <p class="text-[16px] font-bold text-white">Next in queue</p>
+                        <p class="text-[14px] font-bold text-[#858585]">Show all</p>
+                    </div>
+
+                    <div class="second-area flex gap-4 items-center">
+                        
+                        <div class="image-area w-[50px] h-[50px] rounded relative">
+                            <img src="img/covers/billie.jpg" alt="song-image" class="object-cover rounded w-[50px] h-[50px] absolute top-0 left-0">
+                            <div class="glass bg-black/40 w-[50px] h-[50px] absolute top-0 left-0 flex justify-center items-center rounded">
+                                <svg data-encore-id="icon" role="img" aria-hidden="true" class="play e-9812-icon e-9812-baseline invert lg:w-8 lg:h-8 md:w-6 md:h-6 max-md:w-4 max-md:h-4" viewBox="0 0 24 24"><path d="m7.05 3.606 13.49 7.788a.7.7 0 0 1 0 1.212L7.05 20.394A.7.7 0 0 1 6 19.788V4.212a.7.7 0 0 1 1.05-.606z"></path></svg>
+                            </div>
+                        </div>
+
+                        <div class="content leading-4">
+                            <p class="text-[16px] font-semibold text-white w-[100px] h-[16px] overflow-hidden text-ellipsis line-clamp-1">BIRDS OF A FEATHER</p>
+                            <p class="text-[15px] font-semibold text-[#858585]">Billie Eillish</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer id="song-bar-1" class="lg:h-[9.5vh] md:h-[9vh] mb-1 rounded-[6px] flex items-center justify-between lg:px-2 relative">
+        <div id="left-bar" class=" flex lg:gap-4 md:gap-4 items-center">
+            <img src="img/covers/song-poster.jpg" alt="song-poster" class="lg:w-[60px] lg:h-[60px] md:w-[60px] md:h-[60px] object-cover rounded">
+
+            <div class="right-area">
+                <p class="text-[14px] font-semibold text-white">Die With A Smile</p>
+                <p class="text-[13px] font-semibold text-[#858585]">Lady Gaga, Bruno Mars</p>
+            </div>
+
+            <button>
+                <svg data-encore-id="icon" role="img" aria-hidden="true" class="invert lg:w-4 lg:h-4 md:w-4 md:h-4 e-9812-icon e-9812-baseline" viewBox="0 0 16 16" style="--encore-icon-height: var(--encore-graphic-size-decorative-smaller); --encore-icon-width: var(--encore-graphic-size-decorative-smaller);"><path d="M8 1.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8z"></path><path d="M11.75 8a.75.75 0 0 1-.75.75H8.75V11a.75.75 0 0 1-1.5 0V8.75H5a.75.75 0 0 1 0-1.5h2.25V5a.75.75 0 0 1 1.5 0v2.25H11a.75.75 0 0 1 .75.75z"></path></svg>
+            </button>
+        </div>
+
+        <div id="middle-bar" class=" absolute w-[calc(100vw-16px)] top-0 md:right-0 lg:left-0 flex flex-col justify-center lg:items-center md:items-end mt-2 gap-1">
+            <div class="upper flex gap-6 min-md:max-lg:w-[285px]">
+                <button>
+                    <svg data-encore-id="icon" role="img" aria-hidden="true" class="invert lg:w-4 lg:h-4 md:w-4 md:h-4 e-9812-icon e-9812-baseline" viewBox="0 0 16 16" style="--encore-icon-height: var(--encore-graphic-size-decorative-smaller); --encore-icon-width: var(--encore-graphic-size-decorative-smaller);"><path d="M13.151.922a.75.75 0 1 0-1.06 1.06L13.109 3H11.16a3.75 3.75 0 0 0-2.873 1.34l-6.173 7.356A2.25 2.25 0 0 1 .39 12.5H0V14h.391a3.75 3.75 0 0 0 2.873-1.34l6.173-7.356a2.25 2.25 0 0 1 1.724-.804h1.947l-1.017 1.018a.75.75 0 0 0 1.06 1.06L15.98 3.75 13.15.922zM.391 3.5H0V2h.391c1.109 0 2.16.49 2.873 1.34L4.89 5.277l-.979 1.167-1.796-2.14A2.25 2.25 0 0 0 .39 3.5z"></path><path d="m7.5 10.723.98-1.167.957 1.14a2.25 2.25 0 0 0 1.724.804h1.947l-1.017-1.018a.75.75 0 1 1 1.06-1.06l2.829 2.828-2.829 2.828a.75.75 0 1 1-1.06-1.06L13.109 13H11.16a3.75 3.75 0 0 1-2.873-1.34l-.787-.938z"></path></svg>
+                </button>
+
+                <button>
+                    <svg data-encore-id="icon" role="img" aria-hidden="true" class="invert lg:w-4 lg:h-4 md:w-4 md:h-4 e-9812-icon e-9812-baseline" viewBox="0 0 16 16" style="--encore-icon-height: var(--encore-graphic-size-decorative-smaller); --encore-icon-width: var(--encore-graphic-size-decorative-smaller);"><path d="M3.3 1a.7.7 0 0 1 .7.7v5.15l9.95-5.744a.7.7 0 0 1 1.05.606v12.575a.7.7 0 0 1-1.05.607L4 9.149V14.3a.7.7 0 0 1-.7.7H1.7a.7.7 0 0 1-.7-.7V1.7a.7.7 0 0 1 .7-.7h1.6z"></path></svg>
+
+                </button>
+
+                <button id="play-button-1" class="lg:w-8 lg:h-8 md:w-7 md:h-7 rounded-full bg-white flex justify-center items-center">
+                    <svg data-encore-id="icon" role="img" aria-hidden="true" class="play e-9812-icon e-9812-baseline lg:w-5 lg:h-5 md:w-5 md:h-5" viewBox="0 0 24 24"><path d="m7.05 3.606 13.49 7.788a.7.7 0 0 1 0 1.212L7.05 20.394A.7.7 0 0 1 6 19.788V4.212a.7.7 0 0 1 1.05-.606z"></path></svg>
+                </button>
+
+                <button>
+                    <svg data-encore-id="icon" role="img" aria-hidden="true" class=" invert lg:w-4 lg:h-4 md:w-4 md:h-4 e-9812-icon e-9812-baseline" viewBox="0 0 16 16" style="--encore-icon-height: var(--encore-graphic-size-decorative-smaller); --encore-icon-width: var(--encore-graphic-size-decorative-smaller);"><path d="M12.7 1a.7.7 0 0 0-.7.7v5.15L2.05 1.107A.7.7 0 0 0 1 1.712v12.575a.7.7 0 0 0 1.05.607L12 9.149V14.3a.7.7 0 0 0 .7.7h1.6a.7.7 0 0 0 .7-.7V1.7a.7.7 0 0 0-.7-.7h-1.6z"></path></svg>
+
+                </button>
+
+                <button>
+                    <svg data-encore-id="icon" role="img" aria-hidden="true" class="invert lg:w-4 lg:h-4 md:w-4 md:h-4 e-9812-icon e-9812-baseline" viewBox="0 0 16 16" style="--encore-icon-height: var(--encore-graphic-size-decorative-smaller); --encore-icon-width: var(--encore-graphic-size-decorative-smaller);"><path d="M0 4.75A3.75 3.75 0 0 1 3.75 1h8.5A3.75 3.75 0 0 1 16 4.75v5a3.75 3.75 0 0 1-3.75 3.75H9.81l1.018 1.018a.75.75 0 1 1-1.06 1.06L6.939 12.75l2.829-2.828a.75.75 0 1 1 1.06 1.06L9.811 12h2.439a2.25 2.25 0 0 0 2.25-2.25v-5a2.25 2.25 0 0 0-2.25-2.25h-8.5A2.25 2.25 0 0 0 1.5 4.75v5A2.25 2.25 0 0 0 3.75 12H5v1.5H3.75A3.75 3.75 0 0 1 0 9.75v-5z"></path></svg>
+
+                </button>
+            </div>
+
+            <div class="lower flex gap-2">
+                <p class="text-[14px] font-semibold text-[#858585]">00:00</p>
+
+                <button>
+                    <div class="bar border-[2px] lg:w-[400px] md:w-[300px] border-[#1f1f1f] rounded"></div>
+                </button>
+
+                <p class="text-[14px] font-semibold text-[#858585]">00:00</p>
+            </div>
+        </div>
+
+        <div id="right-bar" class="flex gap-4 items-center">
+            <button>
+                <svg data-encore-id="icon" role="img" aria-hidden="true" class=" invert lg:w-4 lg:h-4 md:h-4 md:w-4 e-9812-icon e-9812-baseline" viewBox="0 0 16 16" style="--encore-icon-height: var(--encore-graphic-size-decorative-smaller); --encore-icon-width: var(--encore-graphic-size-decorative-smaller);"><path d="M11.196 8 6 5v6l5.196-3z"></path><path d="M15.002 1.75A1.75 1.75 0 0 0 13.252 0h-10.5a1.75 1.75 0 0 0-1.75 1.75v12.5c0 .966.783 1.75 1.75 1.75h10.5a1.75 1.75 0 0 0 1.75-1.75V1.75zm-1.75-.25a.25.25 0 0 1 .25.25v12.5a.25.25 0 0 1-.25.25h-10.5a.25.25 0 0 1-.25-.25V1.75a.25.25 0 0 1 .25-.25h10.5z"></path></svg>
+            </button>
+            
+            <button>
+                <svg data-encore-id="icon" role="img" aria-hidden="true" class="invert lg:w-4 lg:h-4 md:h-4 md:w-4 e-9812-icon e-9812-baseline" viewBox="0 0 16 16" style="--encore-icon-height: var(--encore-graphic-size-decorative-smaller); --encore-icon-width: var(--encore-graphic-size-decorative-smaller);"><path d="M13.426 2.574a2.831 2.831 0 0 0-4.797 1.55l3.247 3.247a2.831 2.831 0 0 0 1.55-4.797zM10.5 8.118l-2.619-2.62A63303.13 63303.13 0 0 0 4.74 9.075L2.065 12.12a1.287 1.287 0 0 0 1.816 1.816l3.06-2.688 3.56-3.129zM7.12 4.094a4.331 4.331 0 1 1 4.786 4.786l-3.974 3.493-3.06 2.689a2.787 2.787 0 0 1-3.933-3.933l2.676-3.045 3.505-3.99z"></path></svg>
+
+            </button>
+            
+            <button>
+                <svg data-encore-id="icon" role="img" aria-hidden="true" class="invert lg:w-4 lg:h-4 md:h-4 md:w-4 e-9812-icon e-9812-baseline" viewBox="0 0 16 16" style="--encore-icon-height: var(--encore-graphic-size-decorative-smaller); --encore-icon-width: var(--encore-graphic-size-decorative-smaller);"><path d="M15 15H1v-1.5h14V15zm0-4.5H1V9h14v1.5zm-14-7A2.5 2.5 0 0 1 3.5 1h9a2.5 2.5 0 0 1 0 5h-9A2.5 2.5 0 0 1 1 3.5zm2.5-1a1 1 0 0 0 0 2h9a1 1 0 1 0 0-2h-9z"></path></svg>
+
+            </button>
+            
+            <button>
+                <svg data-encore-id="icon" role="img" aria-hidden="true" class="invert lg:w-4 lg:h-4 md:h-4 md:w-4 e-9812-icon e-9812-baseline" viewBox="0 0 16 16" style="--encore-icon-height: var(--encore-graphic-size-decorative-smaller); --encore-icon-width: var(--encore-graphic-size-decorative-smaller);"><path d="M6 2.75C6 1.784 6.784 1 7.75 1h6.5c.966 0 1.75.784 1.75 1.75v10.5A1.75 1.75 0 0 1 14.25 15h-6.5A1.75 1.75 0 0 1 6 13.25V2.75zm1.75-.25a.25.25 0 0 0-.25.25v10.5c0 .138.112.25.25.25h6.5a.25.25 0 0 0 .25-.25V2.75a.25.25 0 0 0-.25-.25h-6.5zm-6 0a.25.25 0 0 0-.25.25v6.5c0 .138.112.25.25.25H4V11H1.75A1.75 1.75 0 0 1 0 9.25v-6.5C0 1.784.784 1 1.75 1H4v1.5H1.75zM4 15H2v-1.5h2V15z"></path><path d="M13 10a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm-1-5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"></path></svg>
+
+            </button>
+            
+            <div class="flex gap-2 items-center">
+                <button>
+                    <svg data-encore-id="icon" role="presentation" aria-label="Volume high" aria-hidden="false" class="invert lg:w-4 lg:h-4 md:h-4 md:w-4 e-9812-icon e-9812-baseline" id="volume-icon" viewBox="0 0 16 16" style="--encore-icon-height: var(--encore-graphic-size-informative-smaller); --encore-icon-width: var(--encore-graphic-size-informative-smaller);"><path d="M9.741.85a.75.75 0 0 1 .375.65v13a.75.75 0 0 1-1.125.65l-6.925-4a3.642 3.642 0 0 1-1.33-4.967 3.639 3.639 0 0 1 1.33-1.332l6.925-4a.75.75 0 0 1 .75 0zm-6.924 5.3a2.139 2.139 0 0 0 0 3.7l5.8 3.35V2.8l-5.8 3.35zm8.683 4.29V5.56a2.75 2.75 0 0 1 0 4.88z"></path><path d="M11.5 13.614a5.752 5.752 0 0 0 0-11.228v1.55a4.252 4.252 0 0 1 0 8.127v1.55z"></path></svg>
+                </button>
+
+                <button>
+                    <hr class="border-2 border-white w-[100px] rounded">
+                </button>
+            </div>
+            
+            <button>
+                <svg data-encore-id="icon" role="img" aria-hidden="true" class="invert lg:w-4 lg:h-4 md:h-4 md:w-4 e-9812-icon e-9812-baseline" viewBox="0 0 16 16" style="--encore-icon-height: var(--encore-graphic-size-decorative-smaller); --encore-icon-width: var(--encore-graphic-size-decorative-smaller);"><path d="M16 2.45c0-.8-.65-1.45-1.45-1.45H1.45C.65 1 0 1.65 0 2.45v11.1C0 14.35.65 15 1.45 15h5.557v-1.5H1.5v-11h13V7H16V2.45z"></path><path d="M15.25 9.007a.75.75 0 0 1 .75.75v4.493a.75.75 0 0 1-.75.75H9.325a.75.75 0 0 1-.75-.75V9.757a.75.75 0 0 1 .75-.75h5.925z"></path></svg>
+
+            </button>
+
+            <button>
+                <svg width="16" class="invert lg:w-4 lg:h-4 md:h-4 md:w-4 " height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M0.25 3C0.25 2.0335 1.0335 1.25 2 1.25H5.375V2.75H2C1.86193 2.75 1.75 2.86193 1.75 3V5.42857H0.25V3ZM14 2.75H10.625V1.25H14C14.9665 1.25 15.75 2.0335 15.75 3V5.42857H14.25V3C14.25 2.86193 14.1381 2.75 14 2.75ZM1.75 10.5714V13C1.75 13.1381 1.86193 13.25 2 13.25H5.375V14.75H2C1.0335 14.75 0.25 13.9665 0.25 13V10.5714H1.75ZM14.25 13V10.5714H15.75V13C15.75 13.9665 14.9665 14.75 14 14.75H10.625V13.25H14C14.1381 13.25 14.25 13.1381 14.25 13Z" fill="currentColor"></path></svg>
+
+
+            </button>
+        </div>
+    </footer>
+
+    <footer id="song-bar-2" class="flex justify-between items-center px-2">
+        <div class="left-area flex gap-2 items-center">
+            <img src="img/covers/song-poster.jpg" alt="song-poster" class="w-[60px] h-[60px] rounded object-cover">
+
+            <div class="right-area">
+                <p class="text-[12px] font-semibold text-white">Die With A Smile</p>
+                <p class="text-[10px] font-semibold text-[#858585]">Lady Gaga, Bruno Mars</p>
+            </div>
+        </div>
+
+        <audio id="audio" src=""></audio>
+        <div class="button-area flex gap-4">
+            <button>
+                <svg data-encore-id="icon" role="img" aria-hidden="true" class="invert w-6 h-6 e-9812-icon e-9812-baseline" viewBox="0 0 16 16" style="--encore-icon-height: var(--encore-graphic-size-decorative-smaller); --encore-icon-width: var(--encore-graphic-size-decorative-smaller);"><path d="M8 1.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8z"></path><path d="M11.75 8a.75.75 0 0 1-.75.75H8.75V11a.75.75 0 0 1-1.5 0V8.75H5a.75.75 0 0 1 0-1.5h2.25V5a.75.75 0 0 1 1.5 0v2.25H11a.75.75 0 0 1 .75.75z"></path></svg>
+            </button>
+
+            <button>
+                <svg data-encore-id="icon" role="img" aria-hidden="true" class="invert w-7 h-7 e-9812-icon e-9812-baseline" viewBox="0 0 16 16" style="--encore-icon-height: var(--encore-graphic-size-decorative-smaller); --encore-icon-width: var(--encore-graphic-size-decorative-smaller);"><path d="M6 2.75C6 1.784 6.784 1 7.75 1h6.5c.966 0 1.75.784 1.75 1.75v10.5A1.75 1.75 0 0 1 14.25 15h-6.5A1.75 1.75 0 0 1 6 13.25V2.75zm1.75-.25a.25.25 0 0 0-.25.25v10.5c0 .138.112.25.25.25h6.5a.25.25 0 0 0 .25-.25V2.75a.25.25 0 0 0-.25-.25h-6.5zm-6 0a.25.25 0 0 0-.25.25v6.5c0 .138.112.25.25.25H4V11H1.75A1.75 1.75 0 0 1 0 9.25v-6.5C0 1.784.784 1 1.75 1H4v1.5H1.75zM4 15H2v-1.5h2V15z"></path><path d="M13 10a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm-1-5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"></path></svg>
+            </button>
+
+            <button id="play-button-2">
+                <svg data-encore-id="icon" role="img" aria-hidden="true" class="invert w-7 h-7 e-9812-icon e-9812-baseline" viewBox="0 0 16 16" style="--encore-icon-height: var(--encore-graphic-size-decorative-smaller); --encore-icon-width: var(--encore-graphic-size-decorative-smaller);"><path d="M3 1.713a.7.7 0 0 1 1.05-.607l10.89 6.288a.7.7 0 0 1 0 1.212L4.05 14.894A.7.7 0 0 1 3 14.288V1.713z"></path></svg>
+            </button>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
