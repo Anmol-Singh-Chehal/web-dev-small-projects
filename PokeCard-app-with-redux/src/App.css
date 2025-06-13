@@ -1,0 +1,16 @@
+@import "tailwindcss";
+
+@layer utilities{
+    .active-left{
+        @apply text-amber-500 bg-amber-950 border-2 border-amber-500 font-semibold rounded-l-md px-2 py-0.5 cursor-pointer;
+    }
+    .not-active-left{
+        @apply bg-gray-700 px-2 py-0.5 text-white font-semibold rounded-l-md border-white border-2 cursor-pointer;
+    }
+    .active-right{
+        @apply text-amber-500 bg-amber-950 border-2 border-amber-500 font-semibold rounded-r-md px-2 py-0.5 cursor-pointer;
+    }
+    .not-active-right{
+        @apply bg-gray-700 px-2 py-0.5 text-white font-semibold rounded-r-md border-white border-2 cursor-pointer;
+    }
+}
