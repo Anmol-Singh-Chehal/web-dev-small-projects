@@ -1,0 +1,13 @@
+{
+  "name": "typescriptpractice",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "watch": "tsc --watch",
+    "file": "node .\\dist\\typeNarrowing.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
